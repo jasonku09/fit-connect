@@ -3,6 +3,11 @@
 
 <dom-module id="fc-user-list">
   <template>
+    <template is="x-repeat" items="[[users]]">
+      <paper-item>
+        <div>[[user.name]]</div>
+      </paper-item>
+    </template>
   </template>
 </dom-module>
 

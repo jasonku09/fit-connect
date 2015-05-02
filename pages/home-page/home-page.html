@@ -4,11 +4,13 @@
 
 <dom-module id="home-page">
   <template>
+    <wxy-jsonapi id="api" url="api/accounts/clients"><wxy-jsonapi>
     <wxy-scaffold>
       <fc-navigation class="navigation"></fc-navigation>
       <div class="tool">Clients</div>
       <fc-user-list></fc-user-list>
       <fc-calendar></fc-calendar>
+      <paper-fab icon="add" on-tap="handleAddTap"></paper-fab>
       <div class="right-tool">[[selectedUser.name]]</div>
       <fc-user-detail user="[[selectedUser]]" class="right-drawer"></fc-user-detail>
     </wxy-scaffold>
