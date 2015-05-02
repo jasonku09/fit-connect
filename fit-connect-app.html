@@ -11,23 +11,20 @@
 <dom-module id="fit-connect-app">
   <style>
     :host {
-      --scaffold-nav-color: midnightblue;
+      --scaffold-right-tool-color: #303F9F;
     }
   </style>
   <template>
-    <wxy-scaffold>
-      <nav drawer></nav>
-      <wxy-router key="main" main>
-        <wxy-route path="/"
-                   name="home-page"></wxy-route>
-        <wxy-route path="/user/:userId"
-                   name="user-page"></wxy-route>
-        <wxy-route path="/user/:userId/workout"
-                   name="workout-page"></wxy-route>
-        <wxy-route path="/user/:userId/data"
-                   name="data-page"></wxy-route>
-      </wxy-router>
-    </wxy-scaffold>
+    <wxy-router key="main">
+      <wxy-route path="/"
+                 name="home-page"></wxy-route>
+      <wxy-route path="/user/:userId"
+                 name="user-page"></wxy-route>
+      <wxy-route path="/user/:userId/workout"
+                 name="workout-page"></wxy-route>
+      <wxy-route path="/user/:userId/data"
+                 name="data-page"></wxy-route>
+    </wxy-router>
   </template>
 </dom-module>
 

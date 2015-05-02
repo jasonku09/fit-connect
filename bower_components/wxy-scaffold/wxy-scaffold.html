@@ -5,25 +5,25 @@
 
 <dom-module id="wxy-scaffold">
   <style>
-    [drawer] {
-      background-color: var(--scaffold-nav-color);
-    }
+    .tool { background-color: var(--scaffold-tool-color); }
+    .right-drawer { background-color: #f5f5f5; }
+    .right-drawer-tool { background-color: var(--scaffold-right-tool-color); }
   </style>
   <template>
-    <paper-drawer-panel>
-      <div drawer class="fit">
-        <content select=".navigation"></content>
-      </div>
-      <paper-header-panel class="fit" main mode="seamed">
-        <paper-toolbar>
+    <paper-drawer-panel right-drawer>
+      <paper-header-panel main class="fit">
+        <paper-toolbar class="tool">
           <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
-          <div class="flex">
-            <content select=".tool"></content>
-          </div>
+          <div class="flex"><content select=".tool"></content></div>
         </paper-toolbar>
-        <div class="fit">
-          <content select="*"></content>
-        </div>
+        <paper-drawer-panel>
+          <nav class="fit left-drawer" drawer><content select=".navigation"></content></nav>
+          <div class="fit main" main><content select="*"></content></div>
+        </paper-drawer-panel>
+      </paper-header-panel>
+      <paper-header-panel drawer class="fit right-drawer">
+        <paper-toolbar class="right-drawer-tool"><content select=".right-tool"></content></paper-toolbar>
+        <div class="fit right-drawer"><content select=".right-drawer"></content></div>
       </paper-header-panel>
     </paper-drawer-panel>
   </template>
