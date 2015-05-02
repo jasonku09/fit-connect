@@ -1,0 +1,28 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-drawer-panel/paper-drawer-panel.html">
+
+<dom-module id="fc-user-browser">
+  <template>
+    <paper-drawer-panel right-drawer>
+      <div main>
+        <paper-header-panel class="fit">
+          <paper-toolbar>
+            <div>Clients</div>
+          </paper-toolbar>
+          <fc-user-list></fc-user-list>
+          <fc-trainer-calendar></fc-trainer-calendar>
+        </paper-header-panel>
+      </div>
+      <div drawer>
+        <paper-header-panel class="fit">
+          <paper-toolbar>
+            <div>[[selectedUser.name]]</div>
+          </paper-toolbar>
+          <fc-user-detail user="[[selectedUser]]"></fc-user-detail>
+        </paper-header-panel>
+      </div>
+    </paper-drawer-panel>
+  </template>
+</dom-module>
+
+<script src="fc-user-browser.js"></script>

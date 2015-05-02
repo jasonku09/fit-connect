@@ -14,13 +14,16 @@
       <div drawer class="fit">
         <content select=".navigation"></content>
       </div>
-      <paper-header-panel class="fit" main>
+      <paper-header-panel class="fit" main mode="seamed">
         <paper-toolbar>
           <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
           <div class="flex">
-            <content select="*"></content>
+            <content select=".tool"></content>
           </div>
         </paper-toolbar>
+        <div class="fit">
+          <content select="*"></content>
+        </div>
       </paper-header-panel>
     </paper-drawer-panel>
   </template>
