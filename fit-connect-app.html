@@ -1,0 +1,34 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/wxy-router/wxy-router.html">
+
+<link rel="import" href="pages/home-page/home-page.html">
+<link rel="import" href="pages/user-page/user-page.html">
+<link rel="import" href="pages/workout-page/workout-page.html">
+<link rel="import" href="pages/data-page/data-page.html">
+
+<link rel="import" href="bower_components/wxy-scaffold/wxy-scaffold.html">
+
+<dom-module id="fit-connect-app">
+  <style>
+    :host {
+      --scaffold-nav-color: midnightblue;
+    }
+  </style>
+  <template>
+    <wxy-scaffold>
+      <nav drawer></nav>
+      <wxy-router key="main" main>
+        <wxy-route path="/"
+                   name="home-page"></wxy-route>
+        <wxy-route path="/user/:userId"
+                   name="user-page"></wxy-route>
+        <wxy-route path="/user/:userId/workout"
+                   name="workout-page"></wxy-route>
+        <wxy-route path="/user/:userId/data"
+                   name="data-page"></wxy-route>
+      </wxy-router>
+    </wxy-scaffold>
+  </template>
+</dom-module>
+
+<script>Polymer({is:"fit-connect-app"})</script>

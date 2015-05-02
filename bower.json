@@ -1,0 +1,22 @@
+{
+  "name": "fit-connect",
+  "version": "0.0.0",
+  "homepage": "https://github.com/wuxiaoying/fit-connect",
+  "authors": [
+    "Helen Wu <xiaoyingw12@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#0.8.0-rc.7",
+    "iron-elements": "PolymerElements/iron-elements#~0.8.0",
+    "paper-elements": "PolymerElements/paper-elements",
+    "wxy-router": "wxy-elements/wxy-router"
+  }
+}
