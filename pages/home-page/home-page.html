@@ -5,6 +5,12 @@
 <dom-module id="home-page">
   <template>
     <wxy-scaffold>
+      <fc-navigation class="navigation"></fc-navigation>
+      <div class="tool">Clients</div>
+      <fc-user-list></fc-user-list>
+      <fc-calendar></fc-calendar>
+      <div class="right-tool">[[selectedUser.name]]</div>
+      <fc-user-detail user="[[selectedUser]]" class="right-drawer"></fc-user-detail>
     </wxy-scaffold>
   </template>
 </dom-module>
