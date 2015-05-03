@@ -10,10 +10,10 @@
       <fc-navigation class="navigation"></fc-navigation>
       <div class="tool">Clients</div>
       <fc-user-list controller="[[controller]]"></fc-user-list>
-      <fc-calendar></fc-calendar>
+      <fc-calendar controller="[[controller]]"></fc-calendar>
       <paper-fab icon="add" on-tap="handleAddTap"></paper-fab>
       <div class="right-tool">[[selectedUser.name]]</div>
-      <fc-user-detail user="[[selectedUser]]" class="right-drawer"></fc-user-detail>
+      <fc-user-detail controller="[[controller]]" user-id="[[selectedUser.id]]" class="right-drawer"></fc-user-detail>
     </wxy-scaffold>
   </template>
 </dom-module>

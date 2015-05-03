@@ -3,9 +3,10 @@
 
 <dom-module id="fc-user-list">
   <template>
-    <template is="x-repeat" items="[[users]]">
+    <template is="x-repeat" items="[[list.data]]">
       <paper-item on-tap="handleItemTap">
-        <div class="flex">[[user.name]]</div>
+        <iron-image src="[[item.photo]]"></iron-image>
+        <div class="flex">[[item.name]]</div>
         <iron-icon icon="chevron-right"></iron-icon>
       </paper-item>
     </template>
