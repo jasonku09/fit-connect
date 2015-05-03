@@ -4,8 +4,9 @@
 <dom-module id="fc-user-list">
   <template>
     <template is="x-repeat" items="[[users]]">
-      <paper-item>
-        <div>[[user.name]]</div>
+      <paper-item on-tap="handleItemTap">
+        <div class="flex">[[user.name]]</div>
+        <iron-icon icon="chevron-right"></iron-icon>
       </paper-item>
     </template>
   </template>

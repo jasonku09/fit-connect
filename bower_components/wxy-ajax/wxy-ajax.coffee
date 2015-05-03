@@ -14,7 +14,8 @@ handlers =
       return response
 
 Polymer
-  is: 'ui-ajax'
+  is: 'wxy-ajax'
+
   properties:
     url: String
     handleAs: String

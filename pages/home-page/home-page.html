@@ -1,14 +1,15 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/wxy-scaffold/wxy-scaffold.html">
-<link rel="import" href="../../app/fc-user-browser/fc-user-browser.html">
+<link rel="import" href="../../bower_components/wxy-jsonapi/wxy-jsonapi.html">
+<link rel="import" href="../../app/fc-user-list/fc-user-list.html">
 
 <dom-module id="home-page">
   <template>
-    <wxy-jsonapi id="api" url="api/accounts/clients"><wxy-jsonapi>
+    <wxy-jsonapi id="api" url="https://fitconnectapp.appspot.com/api/account/clients"><wxy-jsonapi>
     <wxy-scaffold>
       <fc-navigation class="navigation"></fc-navigation>
       <div class="tool">Clients</div>
-      <fc-user-list></fc-user-list>
+      <fc-user-list controller="[[controller]]"></fc-user-list>
       <fc-calendar></fc-calendar>
       <paper-fab icon="add" on-tap="handleAddTap"></paper-fab>
       <div class="right-tool">[[selectedUser.name]]</div>
