@@ -11,19 +11,19 @@
   </style>
   <template>
     <paper-drawer-panel right-drawer>
-      <paper-header-panel main class="fit">
+      <paper-header-panel drawer class="fit right-drawer" mode="seamed">
+        <paper-toolbar class="right-drawer-tool"><content select=".right-tool"></content></paper-toolbar>
+        <div class="fit right-drawer"><content select=".right-drawer"></content></div>
+      </paper-header-panel>
+      <paper-header-panel main class="fit" mode="seamed">
         <paper-toolbar class="tool">
           <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
           <div class="flex"><content select=".tool"></content></div>
         </paper-toolbar>
-        <paper-drawer-panel>
+        <paper-drawer-panel drawer-width="130px">
           <nav class="fit left-drawer" drawer><content select=".navigation"></content></nav>
           <div class="fit main" main><content select="*"></content></div>
         </paper-drawer-panel>
-      </paper-header-panel>
-      <paper-header-panel drawer class="fit right-drawer">
-        <paper-toolbar class="right-drawer-tool"><content select=".right-tool"></content></paper-toolbar>
-        <div class="fit right-drawer"><content select=".right-drawer"></content></div>
       </paper-header-panel>
     </paper-drawer-panel>
   </template>

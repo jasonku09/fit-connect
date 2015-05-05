@@ -2,14 +2,42 @@
 <link rel="import" href="../../bower_components/paper-drawer-panel/paper-drawer-panel.html">
 
 <dom-module id="fc-user-list">
+  <style>
+    paper-item{
+      height: 50px;
+      border-bottom: 1px solid rgb(230,230,230);
+      color: rgb(120,120,120);
+    }
+    .profile-image{
+      width: 40px;
+      height: 40px;
+      border-radius: 40px;
+      margin-left: 10px;
+      margin-right: 10px;
+      border: 1px solid rgb(200,200,200);
+    }
+    .temp-fab{
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      width:45px;
+      height:45px;
+      border-radius: 30px;
+      background-color:rgb(27, 207, 84);
+      font-size: 25px;
+      font-weight: 100;
+    }
+  </style>
   <template>
     <template is="x-repeat" items="[[list.data]]">
-      <paper-item on-tap="handleItemTap">
-        <iron-image src="[[item.photo]]"></iron-image>
+      <paper-item class="horizontal layout center" on-tap="handleItemTap">
+        <image class="profile-image" src="../../images/default_profile.png">
         <div class="flex">[[item.name]]</div>
         <iron-icon icon="chevron-right"></iron-icon>
       </paper-item>
     </template>
+    <!--FAB Placeholder-->
+    <div class="temp-fab horizontal layout center center-justified">+</div>
   </template>
 </dom-module>
 

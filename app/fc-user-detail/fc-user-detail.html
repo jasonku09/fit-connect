@@ -1,8 +1,26 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <dom-module id="fc-user-detail">
+  <style>
+    paper-button{
+      height: 35px;
+      background-color: #3AAEEA;
+      color: white;
+      font-size: 12px;
+      font-weight: 100;
+      margin: 5px;
+      letter-spacing: 1px;
+    }
+  </style>
   <template>
-    <fc-body></fc-body>
+    <div class="vertical layout fit">
+      <fc-body></fc-body>
+      <div class="flex"></div>
+      <div class="horizontal layout">
+        <paper-button class="flex vertical layout center center-justified">Profile</paper-button>
+        <paper-button class="flex vertical layout center center-justified">Workout</paper-button>
+      </div>
+    </div>
   </template>
 </dom-module>
 

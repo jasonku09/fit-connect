@@ -4,4 +4,3 @@ Polymer
   attached: ->
     @controller = @$.api
     return
-    

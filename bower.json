@@ -17,6 +17,7 @@
     "polymer": "Polymer/polymer#0.8.0-rc.7",
     "iron-elements": "PolymerElements/iron-elements#~0.8.0",
     "paper-elements": "PolymerElements/paper-elements",
-    "wxy-router": "wxy-elements/wxy-router"
+    "wxy-router": "wxy-elements/wxy-router",
+    "iron-icons": "polymerelements/iron-icons#~0.8.3"
   }
 }
