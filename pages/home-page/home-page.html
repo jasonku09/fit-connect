@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/wxy-scaffold/wxy-scaffold.html">
 <link rel="import" href="../../bower_components/wxy-jsonapi/wxy-jsonapi.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
@@ -12,9 +13,12 @@
 <dom-module id="home-page">
   <link rel="import" type="css" href="home-page.css">
   <template>
-    <wxy-jsonapi id="api" url="https://fitconnectapp.appspot.com/api/account/clients"></wxy-jsonapi>
+    <!--<wxy-jsonapi id="api" url="https://fitconnectapp.appspot.com/api/account/clients"></wxy-jsonapi>-->
+    <iron-ajax auto url="https://fitconnectapp.appspot.com/api/account/clients"
+        params='{"token":"ef570fa3-48af-45cd-905f-0f0a8915cf91"}'
+        handle-as="json" last-response="{{clientResponse}}" on-response="onAjaxResponse"></iron-ajax>
     <wxy-scaffold id="host">
-      <fc-navigation class="navigation"></fc-navigation>
+      <fc-navigation class="navigation" selected="clients"></fc-navigation>
       <div class="tool fit">
         <!--TODO: Make logo into a .png-->
         <div class="horizontal layout center">
@@ -23,19 +27,18 @@
           </div>
           <div class="title padding-left">Clients</div>
           <div class="flex"></div>
-          <iron-icon class="tool-icon" icon="search"></iron-icon>
           <iron-icon class="tool-icon" icon="today"></iron-icon>
           <iron-icon class="tool-icon" icon="editor:format-list-bulleted"></iron-icon>
         </div>
       </div>
       <div class="right-tool">
         <div class="vertical layout">
-          <span class="title">[[selectedUser.name]]</span>
+          <span class="title">[[selectedUser.username]]</span>
           <span class="subheader">[[selectedUser.created]]</span>
         </div>
       </div>
       <fc-user-detail controller="[[controller]]" user-id="[[selectedUser.id]]" class="right-drawer"></fc-user-detail>
-      <fc-user-list controller="[[controller]]" selected-user="{{selectedUser}}"></fc-user-list>
+      <fc-user-list controller="[[controller]]" selected-user="{{selectedUser}}" user-list="[[clientResponse.data]]"></fc-user-list>
       <fc-calendar controller="[[controller]]"></fc-calendar>
       <paper-fab icon="add" on-tap="handleAddTap"></paper-fab>
     </wxy-scaffold>

@@ -8,7 +8,7 @@
   <style>
     .drawer{
       background-color:#252525;
-      color: rgb(180,180,180);
+      color: rgb(125,125,125);
       font-weight: 300;
     }
     .nav-item{
@@ -16,18 +16,26 @@
       padding: 15px;
     }
     iron-icon{
-      color: rgb(180,180,180);
+    color: rgb(125,125,125);
       width: 30px;
       height: 30px;
       margin-bottom: 5px;
+    }
+    .selected{
+      color:white;
+    }
+    .selected-bar{
+      width: 5px;
+      height: 100%;
+      background-color:blue;
     }
   </style>
   <template>
     <div class="drawer vertical layout fit">
       <template is="x-repeat" items="[[tabs]]">
         <div class="nav-item vertical layout center center-justified" on-tap="onItemTap">
-          <iron-icon icon="[[item.icon]]"></iron-icon>
-          <div>[[item.displayName]]</div>
+          <iron-icon class$="[[item.class]]" icon="[[item.icon]]"></iron-icon>
+          <div class$="[[item.class]]">[[item.displayName]]</div>
         </div>
       </template>
     </div>

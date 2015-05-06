@@ -23,6 +23,11 @@ Polymer
       icon: 'schedule'
     ]
 
+    for tab in @tabs
+      if tab.name.toLowerCase() == @selected.toLowerCase()
+        tab.class = 'selected'
+        tab.selected = true
+    return
   onItemTap: (e)->
     @selected = e.currentTarget._templateInstance._data.item.name
     return

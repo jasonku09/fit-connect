@@ -5,7 +5,8 @@
       selected: String
     },
     attached: function() {
-      return this.tabs = [
+      var tab, _i, _len, _ref;
+      this.tabs = [
         {
           name: 'clients',
           displayName: 'Clients',
@@ -24,6 +25,14 @@
           icon: 'schedule'
         }
       ];
+      _ref = this.tabs;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        tab = _ref[_i];
+        if (tab.name.toLowerCase() === this.selected.toLowerCase()) {
+          tab["class"] = 'selected';
+          tab.selected = true;
+        }
+      }
     },
     onItemTap: function(e) {
       this.selected = e.currentTarget._templateInstance._data.item.name;
