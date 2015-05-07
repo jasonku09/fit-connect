@@ -1,0 +1,40 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../../bower_components/paper-item/paper-item-body.html">
+
+<dom-module id="fc-exercise-entry">
+  <link rel="import" type="css" href="fc-exercise-entry.css">
+  <template>
+    <paper-item on-click="handleExerciseToggle">
+      <paper-item-body two-line class="vertical layout">
+        <input value="{{exercise.name}}" style="width: 100px; text-align: left; border-bottom: none">
+        <div secondary>[[description]]</div>
+      </paper-item-body>
+    </paper-item>
+    <iron-collapse id$="[[collapseID]]">
+      <div class="main vertical layout flex center center-justified">
+        <template is="x-repeat" items="{{sets}}">
+          <div class="flex horizontal layout" style="width: 100%">
+            <div >[[item.index]]</div>
+            <div class="flex"></div>
+            <input class="rep-input"
+                   value="{{item.reps}}"
+                   onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                   on-click="onFocus">
+             <div class="padding-left">Reps</div>
+             <div class="flex"></div>
+             <input style="margin-left: 25px" class="weight-input"
+                    value="{{item.weight}}"
+                    onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                    on-tap="onFocus">
+             <div class="padding-left">lbs</div>
+
+      <iron-icon on-tap="onDeleteSetTap" icon="cancel" style="width: 15px; height: 15px; margin-left: 10px"></iron-icon>
+          </div>
+        </template>
+      </div>
+    </iron-collapse>
+  </template>
+</dom-module>
+<script src="fc-exercise-entry.js"></script>

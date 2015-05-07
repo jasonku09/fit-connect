@@ -3,6 +3,7 @@ Polymer
 
   properties:
     selected: String
+    router: Object
 
   attached: ->
     @tabs = [
@@ -15,7 +16,7 @@ Polymer
       icon: 'mail'
     ,
       name: 'import'
-      displayName: 'Import/Export'
+      displayName: 'Import'
       icon: 'communication:import-export'
     ,
       name: 'calendar'
@@ -28,6 +29,9 @@ Polymer
         tab.class = 'selected'
         tab.selected = true
     return
+
   onItemTap: (e)->
     @selected = e.currentTarget._templateInstance._data.item.name
+    switch @selected
+      when 'clients' then @router.go '/'
     return

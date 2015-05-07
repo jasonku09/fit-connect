@@ -2,7 +2,8 @@
   Polymer({
     is: "fc-navigation",
     properties: {
-      selected: String
+      selected: String,
+      router: Object
     },
     attached: function() {
       var tab, _i, _len, _ref;
@@ -17,7 +18,7 @@
           icon: 'mail'
         }, {
           name: 'import',
-          displayName: 'Import/Export',
+          displayName: 'Import',
           icon: 'communication:import-export'
         }, {
           name: 'calendar',
@@ -36,6 +37,10 @@
     },
     onItemTap: function(e) {
       this.selected = e.currentTarget._templateInstance._data.item.name;
+      switch (this.selected) {
+        case 'clients':
+          this.router.go('/');
+      }
     }
   });
 

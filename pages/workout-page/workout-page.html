@@ -1,10 +1,24 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../app/fc-navigation/fc-navigation.html">
+<link rel="import" href="../../app/fc-workout-log/fc-workout-log.html">
+
 
 <dom-module id="workout-page">
   <template>
     <wxy-scaffold>
-      <div class="tool">[[workout.name]]</div>
-      <fc-workout-log workout="{{workout}}"><fc-workout-log>
+      <fc-navigation class="navigation" selected="clients" router="[[router]]"></fc-navigation>
+      <div class="tool fit">
+        <!--TODO: Make logo into a .png-->
+        <div class="horizontal layout center">
+          <div id="logo" class="horizontal layout center center-justified">
+            Fit<span id="large">C</span>onnect
+          </div>
+          <div class="title padding-left" on-tap="handleTest"></div>
+          <div class="flex"></div>
+        </div>
+      </div>
+      <div class="tool"></div>
+      <fc-workout-log><fc-workout-log>
     </wxy-scaffold>
   </template>
 </dom-module>

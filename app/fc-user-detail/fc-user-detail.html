@@ -1,10 +1,11 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../fc-body/fc-body.html">
 
 <dom-module id="fc-user-detail">
   <style>
     paper-button{
       height: 35px;
-      background-color: #3AAEEA;
+      background-color: rgb(70, 144, 208);
       color: white;
       font-size: 12px;
       font-weight: 100;
@@ -14,11 +15,11 @@
   </style>
   <template>
     <div class="vertical layout fit">
-      <fc-body></fc-body>
+      <fc-body id="body" class="vertical layout flex" muscles="[[muscles]]" rotate="true"></fc-body>
       <div class="flex"></div>
       <div class="horizontal layout">
         <paper-button class="flex vertical layout center center-justified">Profile</paper-button>
-        <paper-button class="flex vertical layout center center-justified">Workout</paper-button>
+        <paper-button class="flex vertical layout center center-justified" on-tap="handleWorkoutTap">Workout</paper-button>
       </div>
     </div>
   </template>

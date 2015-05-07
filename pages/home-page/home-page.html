@@ -16,16 +16,16 @@
     <!--<wxy-jsonapi id="api" url="https://fitconnectapp.appspot.com/api/account/clients"></wxy-jsonapi>-->
     <iron-ajax auto url="https://fitconnectapp.appspot.com/api/account/clients"
         params='{"token":"ef570fa3-48af-45cd-905f-0f0a8915cf91"}'
-        handle-as="json" last-response="{{clientResponse}}" on-response="onAjaxResponse"></iron-ajax>
+        handle-as="json" last-response="{{clientResponse}}"></iron-ajax>
     <wxy-scaffold id="host">
-      <fc-navigation class="navigation" selected="clients"></fc-navigation>
+      <fc-navigation class="navigation" selected="clients" router="[[router]]"></fc-navigation>
       <div class="tool fit">
         <!--TODO: Make logo into a .png-->
         <div class="horizontal layout center">
           <div id="logo" class="horizontal layout center center-justified">
             Fit<span id="large">C</span>onnect
           </div>
-          <div class="title padding-left">Clients</div>
+          <div class="title padding-left"></div>
           <div class="flex"></div>
           <iron-icon class="tool-icon" icon="today"></iron-icon>
           <iron-icon class="tool-icon" icon="editor:format-list-bulleted"></iron-icon>
@@ -34,11 +34,10 @@
       <div class="right-tool">
         <div class="vertical layout">
           <span class="title">[[selectedUser.username]]</span>
-          <span class="subheader">[[selectedUser.created]]</span>
         </div>
       </div>
-      <fc-user-detail controller="[[controller]]" user-id="[[selectedUser.id]]" class="right-drawer"></fc-user-detail>
-      <fc-user-list controller="[[controller]]" selected-user="{{selectedUser}}" user-list="[[clientResponse.data]]"></fc-user-list>
+      <fc-user-detail hidden$="[[computeUserDetailHidden(selectedUser)]]" controller="[[controller]]" user-id="[[selectedUser._id]]" class="right-drawer" router="[[router]]"></fc-user-detail>
+      <fc-user-list id="user-list" controller="[[controller]]" selected-user="{{selectedUser}}" user-list="[[clientResponse.data]]"></fc-user-list>
       <fc-calendar controller="[[controller]]"></fc-calendar>
       <paper-fab icon="add" on-tap="handleAddTap"></paper-fab>
     </wxy-scaffold>

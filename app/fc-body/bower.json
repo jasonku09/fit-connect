@@ -1,0 +1,28 @@
+{
+  "name": "mct-body",
+  "version": "0.0.0",
+  "authors": [
+    "Helen Wu <xiaoyingw12@gmail.com>",
+    "Jason Ku"
+  ],
+  "description": "Frank!",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "seed"
+  ],
+  "main": "mct-body.html",
+  "license": "MIT",
+  "homepage": "https://github.com/<USERNAME>/mct-body/",
+  "ignore": [
+    "/.*",
+    "/tests/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.2"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^2.0.5"
+  }
+}

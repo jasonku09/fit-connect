@@ -1,6 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-  <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-  <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/paper-drawer-panel/paper-drawer-panel.html">
 
 <dom-module id="fc-user-list">
@@ -8,14 +11,17 @@
   <template>
     <div class="search-bar horizontal layout center">
       <iron-icon class="padding-left"icon="search"></iron-icon>
-      <input value="{{clientSearchText}}" placeholder="Search">
+      <input value="{{clientSearchText}}"
+             placeholder="Search"
+             onfocus="this.placeholder = ''"
+             onblur="this.placeholder = 'Search'">
     </div>
     <template is="x-repeat" items="[[userList]]">
-      <paper-item class="horizontal layout center" on-tap="handleItemTap">
-        <image class="profile-image" src="../../images/default_profile.png">
+      <paper-icon-item class="horizontal layout center" on-tap="handleItemTap" style$="[[parent.computeClientStyle(item.username, selectedUser)]]">
+        <image class="profile-image" src="../../images/default_profile.png" item-icon>
         <div class="flex">[[item.username]]</div>
         <iron-icon icon="chevron-right"></iron-icon>
-      </paper-item>
+      </paper-icon-item>
     </template>
     <!--FAB Placeholder-->
     <div class="temp-fab horizontal layout center center-justified">+</div>

@@ -1,8 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="fc-exercise-entry/fc-exercise-entry.html">
 
 <dom-module id="fc-workout-log">
   <template>
-
+    <template is="x-repeat" items="{{exercises}}">
+      <fc-exercise-entry exercise="{{item}}"></fc-exercise-entry>
+    </template>
+    <div class="temp-fab horizontal layout center center-justified">+</div>
   </template>
 </dom-module>
 

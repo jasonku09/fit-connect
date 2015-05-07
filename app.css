@@ -1,3 +1,1 @@
-.padding-left {
-  margin-left: 10px;
-}
+paper-toolbar,#middleBar,#topBar{height:50px}.padding-left{margin-left:10px}.tool-icon{margin:7px;width:23px;height:23px;color:#297CA6}#logo{color:#f0f0f0;font-weight:100;font-size:12px;letter-spacing:2px;height:50px;background-color:#3273a9;width:100px}#logo #large{font-size:20px;font-weight:400}.title{font-weight:400;font-size:12px;letter-spacing:2px}.subheader{font-size:10px;color:#a4cfe5;margin-top:-10px}.temp-fab{position:absolute;right:15px;bottom:15px;width:45px;height:45px;border-radius:30px;background-color:#64c15a;font-size:25px;font-weight:100}
