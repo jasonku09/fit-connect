@@ -2,11 +2,19 @@
 <link rel="import" href="fc-exercise-entry/fc-exercise-entry.html">
 
 <dom-module id="fc-workout-log">
+  <link rel="import" type="css" href="fc-workout-log.css">
   <template>
-    <template is="x-repeat" items="{{exercises}}">
-      <fc-exercise-entry exercise="{{item}}"></fc-exercise-entry>
-    </template>
-    <div class="temp-fab horizontal layout center center-justified">+</div>
+    <paper-toolbar id="date-container" class="horizontal layout center center-justified">
+        <iron-icon icon="chevron-left" style="margin-right: 35px"></iron-icon>
+        <p>April - 30 - 2015 </p>
+        <iron-icon icon="chevron-right" style="margin-left: 35px"></iron-icon>
+      </paper-toolbar>
+    <div id="exercises-container">
+      <template is="x-repeat" items="{{workout.exercises}}">
+        <fc-exercise-entry exercise="{{item}}"></fc-exercise-entry>
+      </template>
+    </div>
+    <div class="temp-fab horizontal layout center center-justified" on-click="_addExercise">+</div>
   </template>
 </dom-module>
 

@@ -3,35 +3,41 @@ Polymer
   is: "fc-exercise-entry"
 
   properties:
-    exercise: Object
-    sets:
-      type: Array
-      observer: '_handleSetsChange'
+    exercise:
+      type: Object
+      notify: true
+
+    observers:
+      'exercise.name' : '_handleSetsChange'
 
   attached: ->
-    @sets = [
-      {
-        index: 1
-        reps: null
-        weight: null
-      }
-    ]
     # Generate a random unqiue collapse ID for toggling purposes
     @collapseID = 'collapse' + Math.round(Math.random() * 10000000000000)
+    @collapseClosed = true
+    @_handleSetsChange()
     return
 
-  _handleSetsChange: ->
-    @description = "Sets:" + (@sets.length - 1)
+  _handleSetsChange:->
+    @totalWeight = 0
+    totalReps = 0
+    return if !@exercise
+    for set in @exercise.sets
+      if set.repetitions && set.weight
+        @totalWeight += parseInt set.repetitions * parseInt set.weight
+        totalReps += parseInt set.repetitions
+    @numSets = @exercise.sets.length - 1
+    @averageWeight = Math.round @totalWeight / totalReps or 0
 
   handleExerciseToggle:->
+    @collapseClosed = !@collapseClosed
     document.querySelector('#' + @collapseID).toggle()
     return
 
   onFocus: (e)->
-    if e.currentTarget.parentElement._templateInstance._data.item.index == @sets.length
-      @sets.push {
-        index: @sets.length + 1
-        reps: null
+    if e.currentTarget.parentElement._templateInstance._data.item.index == @exercise.sets.length
+      @exercise.sets.push {
+        index: @exercise.sets.length + 1
+        repetitions: null
         weight: null
       }
     @_updateIndexes()
@@ -39,15 +45,15 @@ Polymer
     return
 
   onDeleteSetTap: (e)->
-    if @sets.length == 1
+    if @exercise.sets.length == 1
       return
     index = e.currentTarget.parentElement._templateInstance._data.item.index - 1
-    @sets.splice index, 1
+    @exercise.sets.splice index, 1
     @_updateIndexes()
     @_handleSetsChange()
     return
 
   _updateIndexes: ->
-    for set, index in @sets
+    for set, index in @exercise.sets
       set.index = index + 1
     return

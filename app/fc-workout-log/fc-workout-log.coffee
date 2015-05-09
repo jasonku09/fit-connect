@@ -2,21 +2,31 @@ Polymer
   is: "fc-workout-log"
 
   properties:
-    workout: Object
+    workout:
+      type: Object
+      notify: true
+    defaultExerciseType: String
 
   attached: ->
-    @workout = {}
-    @exercises = [
-      name: "Bench Press"
-      description: "Avg Weight: 0"
-    ,
-      name: "Bench Press"
-      description: "Avg Weight: 0"
-    ,
-      name: "Bench Press"
-      description: "Avg Weight: 0"
-    ,
-      name: "Bench Press"
-      description: "Avg Weight: 0"
-    ]
+    document.addEventListener("DOMSubtreeModified", @_focusInput.bind(this))
+    return
+
+  _addExercise: ->
+    @exerciseAdded = true
+    @workout.exercises.push {
+      name: ""
+      type: @defaultExerciseType
+      sets: [
+        index: 1
+        repetitions: null
+        weight: null
+      ]
+      comments: ""
+    }
+
+  _focusInput: ->
+    if @exerciseAdded
+      inputs = document.getElementsByClassName("name-input")
+      inputs[inputs.length - 1].focus()
+      @exerciseAdded = false
     return

@@ -1,4 +1,11 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icon/communication-icons.html">
 <link rel="import" href="../fc-body/fc-body.html">
 
 <dom-module id="fc-user-detail">
@@ -15,9 +22,28 @@
   </style>
   <template>
     <div class="vertical layout fit">
+      <paper-item>Client Details</paper-item>
       <fc-body id="body" class="vertical layout flex" muscles="[[muscles]]" rotate="true"></fc-body>
-      <div class="flex"></div>
-      <div class="horizontal layout">
+      <paper-item>Contact</paper-item>
+      <paper-icon-item class="padding-top">
+        <iron-icon icon="communication:phone" item-icon></iron-icon>
+        <paper-item-body two-line>
+          <div>(650) 555-1234</div>
+          <div secondary>Mobile</div>
+        </paper-item-body>
+      </paper-icon-item>
+      <paper-icon-item>
+        <iron-icon icon="communication:email" item-icon></iron-icon>
+        <paper-item-body two-line>
+          <div>aliconnors@example.com</div>
+          <div secondary>Personal</div>
+        </paper-item-body>
+      </paper-icon-item>
+      <paper-icon-item class="padding-bottom">
+        <iron-icon icon="communication:message" item-icon></iron-icon>
+        <div style="color:rgb(70, 144, 208)">Message Client</div>
+      </paper-icon-item>
+      <div class="horizontal layout padding-bottom">
         <paper-button class="flex vertical layout center center-justified">Profile</paper-button>
         <paper-button class="flex vertical layout center center-justified" on-tap="handleWorkoutTap">Workout</paper-button>
       </div>

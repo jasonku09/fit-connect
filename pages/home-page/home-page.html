@@ -5,6 +5,7 @@
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../app/fc-user-list/fc-user-list.html">
 <link rel="import" href="../../app/fc-navigation/fc-navigation.html">
 <link rel="import" href="../../app/fc-user-detail/fc-user-detail.html">
@@ -37,6 +38,7 @@
         </div>
       </div>
       <fc-user-detail hidden$="[[computeUserDetailHidden(selectedUser)]]" controller="[[controller]]" user-id="[[selectedUser._id]]" class="right-drawer" router="[[router]]"></fc-user-detail>
+      <paper-toolbar class="nav-toolbar">Clients</paper-toolbar>
       <fc-user-list id="user-list" controller="[[controller]]" selected-user="{{selectedUser}}" user-list="[[clientResponse.data]]"></fc-user-list>
       <fc-calendar controller="[[controller]]"></fc-calendar>
       <paper-fab icon="add" on-tap="handleAddTap"></paper-fab>

@@ -1,10 +1,14 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../app/fc-navigation/fc-navigation.html">
 <link rel="import" href="../../app/fc-workout-log/fc-workout-log.html">
+<link rel="import" href="../../app/fc-workout-detail/fc-workout-detail.html">
+<link rel="import" href="../../services/fc-enums/fc-enums">
 
 
 <dom-module id="workout-page">
   <template>
+    <fc-enums id="fc-enums"></fc-enums>
     <wxy-scaffold>
       <fc-navigation class="navigation" selected="clients" router="[[router]]"></fc-navigation>
       <div class="tool fit">
@@ -18,7 +22,10 @@
         </div>
       </div>
       <div class="tool"></div>
-      <fc-workout-log><fc-workout-log>
+      <div class="right-tool title">Brian Mahamongkol</div>
+      <fc-workout-detail class='right-drawer' workout="[[workout]]"></fc-workout-detail>
+      <paper-toolbar class="nav-toolbar"><iron-icon icon="arrow-back" class="padding-right" on-tap="handleBackTap"></iron-icon>Client / Workouts</paper-toolbar>
+      <fc-workout-log workout="{{workout}}"><fc-workout-log>
     </wxy-scaffold>
   </template>
 </dom-module>
