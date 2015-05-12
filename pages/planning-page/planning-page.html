@@ -1,0 +1,23 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../app/fc-navigation/fc-navigation.html">
+<link rel="import" href="../../app/fc-workout-list/fc-workout-list.html">
+
+<dom-module id="planning-page">
+  <template>
+    <wxy-scaffold>
+      <div class="tool fit">
+        <!--TODO: Make logo into a .png-->
+        <div class="horizontal layout center">
+          <div id="logo" class="horizontal layout center center-justified">
+            Fit<span id="large">C</span>onnect
+          </div>
+        </div>
+      </div>
+      <fc-navigation class="navigation" selected="planning" router="[[router]]"></fc-navigation>
+      <paper-toolbar class="nav-toolbar"></iron-icon>Workout Templates</paper-toolbar>
+      <fc-workout-list></fc-workout-list>
+    </wxy-scaffold>
+  </template>
+</dom-module>
+
+<script src="planning-page.js"></script>

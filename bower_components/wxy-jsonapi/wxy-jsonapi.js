@@ -3,7 +3,10 @@
     is: "wxy-jsonapi",
     properties: {
       url: String,
-      list: Object
+      list: Object,
+      method: String,
+      params: Object,
+      body: Object
     },
     hostAttributes: {
       hidden: true
@@ -14,7 +17,10 @@
         return Promise.resolve(this.list);
       }
       listPromise = this.$.ajax.send({
-        url: this.url
+        url: this.url,
+        params: this.params,
+        method: this.method,
+        body: this.body
       });
       return listPromise.then(function(list) {
         this.list = list;

@@ -24,6 +24,10 @@
           name: 'calendar',
           displayName: 'Calendar',
           icon: 'schedule'
+        }, {
+          name: 'planning',
+          displayName: 'Planning',
+          icon: 'assignment'
         }
       ];
       _ref = this.tabs;
@@ -40,6 +44,9 @@
       switch (this.selected) {
         case 'clients':
           this.router.go('/');
+          break;
+        case 'planning':
+          this.router.go('/planning');
       }
     }
   });

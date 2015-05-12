@@ -5,6 +5,8 @@
 <link rel="import" href="pages/user-page/user-page.html">
 <link rel="import" href="pages/workout-page/workout-page.html">
 <link rel="import" href="pages/data-page/data-page.html">
+<link rel="import" href="pages/login-page/login-page.html">
+<link rel="import" href="pages/planning-page/planning-page.html">
 
 <link rel="import" href="bower_components/wxy-scaffold/wxy-scaffold.html">
 <link rel="stylesheet" type="css" href="app.css">
@@ -24,12 +26,16 @@
     <wxy-router key="main">
       <wxy-route path="/"
                  name="home-page"></wxy-route>
+      <wxy-route path="/login"
+                name="login-page"></wxy-route>
       <wxy-route path="/user/:userId"
                  name="user-page"></wxy-route>
       <wxy-route path="/user/:userId/workout"
                  name="workout-page"></wxy-route>
       <wxy-route path="/user/:userId/data"
                  name="data-page"></wxy-route>
+      <wxy-route path="/planning"
+                 name="planning-page"></wxy-route>
     </wxy-router>
   </template>
 </dom-module>

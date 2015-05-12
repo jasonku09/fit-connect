@@ -22,6 +22,10 @@ Polymer
       name: 'calendar'
       displayName: 'Calendar'
       icon: 'schedule'
+    ,
+      name: 'planning'
+      displayName: 'Planning'
+      icon: 'assignment'
     ]
 
     for tab in @tabs
@@ -34,4 +38,5 @@ Polymer
     @selected = e.currentTarget._templateInstance._data.item.name
     switch @selected
       when 'clients' then @router.go '/'
+      when 'planning' then @router.go '/planning'
     return

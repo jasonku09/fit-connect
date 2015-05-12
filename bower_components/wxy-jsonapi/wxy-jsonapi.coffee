@@ -4,6 +4,9 @@ Polymer
   properties:
     url: String
     list: Object
+    method: String
+    params: Object
+    body: Object
 
   hostAttributes:
     hidden: true
@@ -13,5 +16,8 @@ Polymer
 
     listPromise = @$.ajax.send
       url: @url
+      params: @params
+      method: @method
+      body: @body
 
     listPromise.then (@list) -> @list
