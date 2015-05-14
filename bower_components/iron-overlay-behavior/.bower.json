@@ -1,0 +1,36 @@
+{
+  "name": "iron-overlay-behavior",
+  "version": "0.8.0",
+  "private": true,
+  "main": [
+    "iron-overlay-behavior.html"
+  ],
+  "authors": "The Polymer Authors",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PolymerElements/iron-overlay-behavior.git"
+  },
+  "dependencies": {
+    "polymer": "Polymer/polymer#v0.8.0-rc.7",
+    "iron-fit-behavior": "PolymerElements/iron-fit-behavior#^0.8.0"
+  },
+  "devDependencies": {
+    "iron-doc-viewer": "PolymerElements/iron-doc-viewer#^0.8.0",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^0.8.0",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#^0.8.0",
+    "test-fixture": "PolymerElements/test-fixture#^0.8.0",
+    "web-component-tester": "*",
+    "webcomponentsjs": "^0.6.0"
+  },
+  "homepage": "https://github.com/polymerelements/iron-overlay-behavior",
+  "_release": "0.8.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.8.0",
+    "commit": "abeeed2248dd8d98a67abff88157c4b52111d42b"
+  },
+  "_source": "git://github.com/polymerelements/iron-overlay-behavior.git",
+  "_target": "0.8",
+  "_originalSource": "polymerelements/iron-overlay-behavior",
+  "_direct": true
+}

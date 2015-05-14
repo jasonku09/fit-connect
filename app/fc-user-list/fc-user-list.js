@@ -14,10 +14,11 @@
       testStyle: {
         type: String,
         value: 'background-color:grey'
-      }
+      },
+      token: String
     },
     controllerChanged: function() {
-      this.controller.getList().then((function(_this) {
+      this.controller.getClientList().then((function(_this) {
         return function(list) {
           _this.list = list;
         };
@@ -33,6 +34,26 @@
     },
     computeClientStyle: function(username, selectedUser) {
       return 'background-color: rgb(64, 190, 255)';
+    },
+    handleFabTap: function() {
+      this.$.addClientDialog.open();
+    },
+    handleCancelTap: function() {
+      return this.$.addClientDialog.close();
+    },
+    handleAddClient: function() {
+      this.controller.addClient(this.nameInput, this.emailInput).then(this._onAddResponse.bind(this));
+    },
+    _onAddResponse: function(response) {
+      this.nameInput = null;
+      this.emailInput = null;
+      alert("Client Added");
+      this.$.addClientDialog.close();
+      this.controller.getClientList().then((function(_this) {
+        return function(list) {
+          return _this.userList = list.data;
+        };
+      })(this));
     }
   });
 

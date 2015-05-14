@@ -4,8 +4,13 @@ Polymer
   properties:
     selected: String
     router: Object
+    token:
+      type: String
+      notify: true
+
 
   attached: ->
+    document.querySelector(".navigation").addEventListener('iron-localstorage-load', @checkToken(@router))
     @tabs = [
       name: 'clients'
       displayName: 'Clients'
@@ -40,3 +45,13 @@ Polymer
       when 'clients' then @router.go '/'
       when 'planning' then @router.go '/planning'
     return
+
+  handleLogout: ->
+    @token = null
+    @router.go '/login'
+    return
+
+  checkToken:(router) ->
+    if !@token
+      router.go '/login'
+      return

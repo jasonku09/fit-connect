@@ -2,7 +2,8 @@
   Polymer({
     is: 'login-page',
     attached: function() {
-      return this.signup = false;
+      this.signup = false;
+      return this.controller = this.$.api;
     },
     computeSignupStyle: function(signup) {
       if (this.signup) {
@@ -19,18 +20,10 @@
       }
     },
     handleLoginTap: function() {
-      var data;
       this.passwordInput = this.passwordInput || '';
-      data = new FormData();
-      data.append("email", this.emailInput);
-      data.append("phrase", this.passwordInput);
-      this.$.api.body = data;
-      this.$.api.url = "https://fitconnectapp.appspot.com/login";
-      this.$.api.method = "POST";
-      this.$.api.getList().then(this.testFunc);
+      this.controller.login(this.emailInput, this.passwordInput).then(this._onLoginResponse.bind(this));
     },
     handleSignupTap: function() {
-      var data;
       if (!this.signup) {
         this.signup = true;
         return;
@@ -40,21 +33,14 @@
           return;
         }
         this.passwordInput = this.passwordInput || '';
-        data = new FormData();
-        data.append("username", this.nameInput);
-        data.append("email", this.emailInput);
-        data.append("phrase", this.passwordInput);
-        this.$.api.body = data;
-        this.$.api.url = "https://fitconnectapp.appspot.com/api/account/create";
-        this.$.api.method = "POST";
-        this.$.api.getList().then(this.testFunc);
+        this.controller.createAccount(this.nameInput, this.emailInput, this.passwordInput).then(this._onLoginResponse.bind(this));
       }
     },
     handleBackTap: function() {
       this.signup = false;
     },
-    testFunc: function() {
-      alert('Logged in!');
+    _onLoginResponse: function(response) {
+      this.router.go('/');
     }
   });
 

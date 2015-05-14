@@ -3,10 +3,15 @@
     is: "fc-navigation",
     properties: {
       selected: String,
-      router: Object
+      router: Object,
+      token: {
+        type: String,
+        notify: true
+      }
     },
     attached: function() {
       var tab, _i, _len, _ref;
+      document.querySelector(".navigation").addEventListener('iron-localstorage-load', this.checkToken(this.router));
       this.tabs = [
         {
           name: 'clients',
@@ -47,6 +52,15 @@
           break;
         case 'planning':
           this.router.go('/planning');
+      }
+    },
+    handleLogout: function() {
+      this.token = null;
+      this.router.go('/login');
+    },
+    checkToken: function(router) {
+      if (!this.token) {
+        router.go('/login');
       }
     }
   });

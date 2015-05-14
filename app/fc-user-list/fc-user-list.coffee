@@ -12,9 +12,10 @@ Polymer
     testStyle:
       type: String
       value: 'background-color:grey'
+    token: String
 
   controllerChanged: ->
-    @controller.getList().then (@list) =>
+    @controller.getClientList().then (@list) =>
     return
 
   handleItemTap: (e)->
@@ -30,3 +31,22 @@ Polymer
   # Doesnt work
   computeClientStyle: (username, selectedUser)->
     return 'background-color: rgb(64, 190, 255)'
+
+  handleFabTap: ->
+    @$.addClientDialog.open()
+    return
+
+  handleCancelTap: ->
+    @$.addClientDialog.close()
+
+  handleAddClient: ->
+    @controller.addClient(@nameInput, @emailInput).then @_onAddResponse.bind(this)
+    return
+
+  _onAddResponse: (response)->
+    @nameInput = null
+    @emailInput = null
+    alert("Client Added")
+    @$.addClientDialog.close()
+    @controller.getClientList().then (list) => @userList = list.data
+    return

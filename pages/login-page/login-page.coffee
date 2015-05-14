@@ -3,6 +3,7 @@ Polymer
 
   attached: ->
     @signup = false
+    @controller = @$.api
 
   computeSignupStyle: (signup)->
     if @signup
@@ -19,13 +20,7 @@ Polymer
 
   handleLoginTap: ->
     @passwordInput = @passwordInput || ''
-    data = new FormData()
-    data.append("email", @emailInput)
-    data.append("phrase", @passwordInput)
-    @$.api.body = data
-    @$.api.url = "https://fitconnectapp.appspot.com/login"
-    @$.api.method = "POST"
-    @$.api.getList().then @testFunc
+    @controller.login(@emailInput, @passwordInput).then @_onLoginResponse.bind(this)
     return
 
   handleSignupTap: ->
@@ -39,20 +34,13 @@ Polymer
         return
 
       @passwordInput = @passwordInput || ''
-      data = new FormData()
-      data.append("username", @nameInput)
-      data.append("email", @emailInput)
-      data.append("phrase", @passwordInput)
-      @$.api.body = data
-      @$.api.url = "https://fitconnectapp.appspot.com/api/account/create"
-      @$.api.method = "POST"
-      @$.api.getList().then @testFunc
+      @controller.createAccount(@nameInput, @emailInput, @passwordInput).then @_onLoginResponse.bind(this)
     return
 
   handleBackTap: ->
     @signup = false
     return
 
-  testFunc: ->
-    alert('Logged in!')
+  _onLoginResponse: (response)->
+    @router.go '/'
     return

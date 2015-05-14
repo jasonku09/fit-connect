@@ -20,6 +20,9 @@
     "wxy-router": "wxy-elements/wxy-router",
     "iron-icons": "polymerelements/iron-icons#~0.8.3",
     "iron-collapse": "polymerelements/iron-collapse#~0.8.2",
-    "iron-autogrow-textarea": "polymerelements/iron-autogrow-textarea#0.8"
+    "iron-autogrow-textarea": "polymerelements/iron-autogrow-textarea#0.8",
+    "iron-localstorage": "polymerelements/iron-localstorage#0.8",
+    "iron-overlay-behavior": "polymerelements/iron-overlay-behavior#0.8",
+    "paper-fab": "polymerelements/paper-fab#0.8"
   }
 }
