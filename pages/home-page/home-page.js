@@ -7,7 +7,7 @@
       }
       this.controller = this.$.api;
       this.selectedUser = {};
-      this.selectedUser.username === null;
+      this.selectedUser.username = null;
       this.controller.getClientList().then(this._handleClientsResponse.bind(this));
       this.controller.getAccount().then(this._handleAccountResponse.bind(this));
     },

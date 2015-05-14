@@ -1,14 +1,15 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../app/fc-navigation/fc-navigation.html">
 <link rel="import" href="../../app/fc-workout-log/fc-workout-log.html">
 <link rel="import" href="../../app/fc-workout-detail/fc-workout-detail.html">
-<link rel="import" href="../../services/fc-enums/fc-enums">
+<link rel="import" href="../../app/fc-workout-history-list/fc-workout-history-list.html">
 
 
 <dom-module id="workout-page">
   <template>
-    <fc-enums id="fc-enums"></fc-enums>
     <wxy-scaffold>
       <fc-navigation class="navigation" selected="clients" router="[[router]]"></fc-navigation>
       <div class="tool fit">
@@ -21,9 +22,11 @@
       </div>
       <div class="tool"></div>
       <div class="right-tool title">Brian Mahamongkol</div>
-      <fc-workout-detail class='right-drawer' workout="[[workout]]"></fc-workout-detail>
-      <paper-toolbar class="nav-toolbar"><iron-icon icon="arrow-back" class="padding-right" on-tap="handleBackTap"></iron-icon>Client / Workouts</paper-toolbar>
-      <fc-workout-log workout="{{workout}}"><fc-workout-log>
+      <fc-workout-detail hidden$="[[computeDetailsHidden(selectedWorkout)]]" class='right-drawer' workout="[[selectedWorkout]]"></fc-workout-detail>
+      <paper-toolbar class="nav-toolbar"><iron-icon icon="arrow-back" class="padding-right" on-tap="handleBackTap"></iron-icon>[[toolbarText]]</paper-toolbar>
+      <paper-fab hidden$="[[computeListHidden(selectedWorkout)]]" class="temp-fab" icon="add" on-tap="handleFabTap"></paper-fab>
+      <fc-workout-history-list hidden$="[[computeListHidden(selectedWorkout)]]" selected-workout="{{selectedWorkout}}"></fc-workout-history-list>
+      <fc-workout-log hidden$="[[computeDetailsHidden(selectedWorkout)]]" workout="{{selectedWorkout}}"><fc-workout-log>
     </wxy-scaffold>
   </template>
 </dom-module>

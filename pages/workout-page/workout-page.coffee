@@ -1,75 +1,30 @@
 Polymer
   is: "workout-page"
 
-  attached: ->
+  properties:
+    selectedWorkout:
+      type: Object
 
-    @exerciseTypes = @$['fc-enums'].ExerciseType
-    @defaultExerciseType = @exerciseTypes.Weights
-    @workout = {}
-    @workout.exercises = ["Barbell Bench Press - Medium Grip"
-                          "Incline Dumbbell Press"
-                          "Incline Dumbbell Flyes"
-                          "Machine Shoulder (Military) Press"
-                          "Arnold Dumbbell Press"]
-    @workout = { exercises: [
-      name: "Barbell Bench Press - Medium Grip"
-      type: @exerciseTypes.Weights
-      sets: [
-        {
-          index: 1
-          repetitions: null
-          weight: null
-        }
-      ]
-      comments: ""
-    ,
-      name: "Incline Dumbbell Press"
-      type: @exerciseTypes.Body
-      sets: [
-        {
-          index: 1
-          repetitions: null
-          weight: null
-        }
-      ]
-      comments: ""
-    ,
-      name: "Incline Dumbbell Flyes"
-      type: @exerciseTypes.Cardio
-      sets: [
-        {
-          index: 1
-          repetitions: null
-          weight: null
-        }
-      ]
-      comments: ""
-    ,
-      name: "Machine Shoulder (Military) Press"
-      type: @exerciseTypes.Cardio
-      sets: [
-        {
-          index: 1
-          repetitions: null
-          weight: null
-        }
-      ]
-      comments: ""
-    ,
-      name: "Arnold Dumbbell Press"
-      type: @exerciseTypes.Cardio
-      sets: [
-        {
-          index: 1
-          repetitions: null
-          weight: null
-        }
-      ]
-      comments: ""
-    ]}
-    @workout.comments = "hello"
+  attached: ->
+    @selectedWorkout = null
+    @toolbarText = "Client / Workouts"
+    return
+
+  computeDetailsHidden: (selectedWorkout)->
+    return selectedWorkout == null
+
+  computeListHidden: (selectedWorkout)->
+    return selectedWorkout != null
+
+  handleFabTap: ->
+    @selectedWorkout = { exercises: [] }
+    @toolbarText = "Client / Workouts / WorkoutName"
     return
 
   handleBackTap: ->
-    @router.go '/'
+    if @selectedWorkout
+      @selectedWorkout = null
+      @toolbarText = "Client / Workouts"
+    else
+      @router.go '/'
     return

@@ -11,7 +11,7 @@
     attached: function() {
       document.addEventListener("DOMSubtreeModified", this._focusInput.bind(this));
     },
-    _addExercise: function() {
+    handleFabTap: function() {
       this.exerciseAdded = true;
       return this.workout.exercises.push({
         name: "",

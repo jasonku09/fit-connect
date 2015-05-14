@@ -8,13 +8,25 @@
         value: {}
       },
       router: Object,
-      workout: Object
+      workout: {
+        type: Object,
+        observer: "onWorkoutChange"
+      }
     },
     attached: function() {
       var FcData;
       FcData = this.$.data.FcData;
       this.exerciseDictionary = FcData.ExerciseData.ExerciseDictionary;
       this.muscleNames = Object.keys(FcData.ExerciseData.MuscleExerciseDictionary);
+    },
+    onWorkoutChange: function() {
+      if (!this.workout) {
+        return;
+      }
+      this.$.body.onResize();
+      if (!this.workout.exercises) {
+        return;
+      }
       this._LoadWorkoutBody();
       this._ComputeMainMuscles();
       this.setPathValue('workout.comments', this.workout.comments);

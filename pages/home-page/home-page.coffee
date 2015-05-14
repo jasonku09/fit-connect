@@ -6,7 +6,7 @@ Polymer
       return
     @controller = @$.api
     @selectedUser = {}
-    @selectedUser.username == null
+    @selectedUser.username = null
     @controller.getClientList().then @_handleClientsResponse.bind(this)
     @controller.getAccount().then @_handleAccountResponse.bind(this)
     return

@@ -1,0 +1,30 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="../../services/fc-enums/fc-enums">
+
+<dom-module id="fc-workout-history-list">
+  <style>
+    paper-icon-item{
+      border-bottom: 1px solid rgb(223, 223, 223);
+    }
+  </style>
+  <template>
+    <fc-enums id="fc-enums"></fc-enums>
+    <template is="x-repeat" items="[[workoutHistory]]">
+      <paper-icon-item on-tap="handleWorkoutHistoryTap">
+        <iron-icon icon="bookmark-outline" item-icon></iron-icon>
+        <paper-item-body two-line>
+          <div>[[item.name]]</div>
+          <div secondary>Completed on: <span>[[item.created]]</span></div>
+        </paper-item-body>
+      </paper-icon-item>
+    </template>
+  </template>
+</dom-module>
+
+<script src="fc-workout-history-list.js"></script>

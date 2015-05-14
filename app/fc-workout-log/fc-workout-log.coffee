@@ -11,7 +11,7 @@ Polymer
     document.addEventListener("DOMSubtreeModified", @_focusInput.bind(this))
     return
 
-  _addExercise: ->
+  handleFabTap: ->
     @exerciseAdded = true
     @workout.exercises.push {
       name: ""

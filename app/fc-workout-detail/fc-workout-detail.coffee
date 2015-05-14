@@ -7,12 +7,21 @@ Polymer
       type: Object
       value: {}
     router: Object
-    workout: Object
+    workout:
+      type: Object
+      observer: "onWorkoutChange"
 
   attached: ->
     FcData = @$.data.FcData
     @exerciseDictionary = FcData.ExerciseData.ExerciseDictionary
     @muscleNames = Object.keys FcData.ExerciseData.MuscleExerciseDictionary
+    return
+
+  onWorkoutChange: ->
+    # if its a new workout, we still want to resize the body but not load the muscles or compute main muscles
+    return if !@workout
+    @$.body.onResize()
+    return if !@workout.exercises
     @_LoadWorkoutBody()
     @_ComputeMainMuscles()
     this.setPathValue('workout.comments', @workout.comments)
