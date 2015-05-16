@@ -32,6 +32,9 @@ Polymer
   computeClientStyle: (username, selectedUser)->
     return 'background-color: rgb(64, 190, 255)'
 
+  computeListEmpty: (userList)->
+    return userList.length > 0
+
   handleFabTap: ->
     @$.addClientDialog.open()
     return

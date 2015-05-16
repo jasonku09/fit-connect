@@ -31,7 +31,7 @@
         }
       }
       this.numSets = this.exercise.sets.length - 1;
-      return this.averageWeight = Math.round(this.totalWeight / totalReps || 0);
+      this.averageWeight = Math.round(this.totalWeight / totalReps || 0);
     },
     handleExerciseToggle: function() {
       this.collapseClosed = !this.collapseClosed;

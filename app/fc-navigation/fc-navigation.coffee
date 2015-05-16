@@ -16,6 +16,10 @@ Polymer
       displayName: 'Clients'
       icon: 'social:people-outline'
     ,
+      name: 'planning'
+      displayName: 'Planning'
+      icon: 'assignment'
+    ,
       name: 'inbox'
       displayName: 'Inbox'
       icon: 'mail'
@@ -27,10 +31,6 @@ Polymer
       name: 'calendar'
       displayName: 'Calendar'
       icon: 'schedule'
-    ,
-      name: 'planning'
-      displayName: 'Planning'
-      icon: 'assignment'
     ]
 
     for tab in @tabs

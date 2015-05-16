@@ -5,83 +5,55 @@ Polymer
     selectedWorkout:
       type: Object
       notify: true
+    workoutHistory:
+      type: Array
 
   attached: ->
-    @workoutHistory = [
-      name: "Week 1 Cycle 1"
-      created: "5/1/2015"
-    ,
-      name: "Week 1 Cycle 2"
-      created: "5/3/2015"
-    ,
-      name: "Week 1 Cycle 3"
-      created: "5/3/2015"
-    ,
-      name: "Week 2 Cycle 1"
-      created: "5/3/2015"
-    ,
-      name: "Week 2 Cycle 2"
-      created: "5/3/2015"
-    ]
-
-  handleWorkoutHistoryTap: ->
-    @exerciseTypes = @$['fc-enums'].ExerciseType
-    @defaultExerciseType = @exerciseTypes.Weights
-    @selectedWorkout = { exercises: [
-      name: "Barbell Bench Press - Medium Grip"
-      type: @exerciseTypes.Weights
-      sets: [
-        {
-          index: 1
-          repetitions: null
-          weight: null
-        }
-      ]
-      comments: ""
-    ,
-      name: "Incline Dumbbell Press"
-      type: @exerciseTypes.Body
-      sets: [
-        {
-          index: 1
-          repetitions: null
-          weight: null
-        }
-      ]
-      comments: ""
-    ,
-      name: "Incline Dumbbell Flyes"
-      type: @exerciseTypes.Cardio
-      sets: [
-        {
-          index: 1
-          repetitions: null
-          weight: null
-        }
-      ]
-      comments: ""
-    ,
-      name: "Machine Shoulder (Military) Press"
-      type: @exerciseTypes.Cardio
-      sets: [
-        {
-          index: 1
-          repetitions: null
-          weight: null
-        }
-      ]
-      comments: ""
-    ,
-      name: "Arnold Dumbbell Press"
-      type: @exerciseTypes.Cardio
-      sets: [
-        {
-          index: 1
-          repetitions: null
-          weight: null
-        }
-      ]
-      comments: ""
-    ]}
-    @selectedWorkout.comments = "hello"
     return
+
+  handleWorkoutHistoryTap: (e)->
+    selectedWorkout = @$.historyList.itemForElement e.target
+    @selectedWorkout = @_parseHistory selectedWorkout
+    return
+
+  computeListEmpty: (workoutHistory)->
+    return workoutHistory.length > 0
+
+  _parseHistory: (selectedWorkout)->
+    workout = {
+      exercises: []
+      created: selectedWorkout.created || "Unknown"
+      comments: selectedWorkout.commnets || ""
+      name: selectedWorkout.name || "New Workout"
+    }
+    exercisesHash = {}
+    for exercise in selectedWorkout.exercises
+      if !exercisesHash[exercise.name]
+        exercisesHash[exercise.name] = true
+        workout.exercises.push {
+          name: exercise.name
+          sets: [
+            {
+              index: 1
+              repetitions: exercise.repetitions || null
+              weight: exercise.weight || null
+              comments: exercise.comments || ""
+            }
+          ]
+        }
+      else
+        index = @_findExerciseIndex(workout.exercises,exercise.name)
+        existingExercise = workout.exercises[index]
+        existingExercise.sets.push {
+          index: existingExercise.sets.length + 1
+          repetitions: exercise.repetitions || null
+          weight: exercise.weight || null
+          comments: exercise.comments || ""
+        }
+    return workout
+
+  _findExerciseIndex:(array, exerciseName)->
+    for exercise, index in array
+      if exercise.name == exerciseName
+        return index
+    return -1

@@ -1,9 +1,11 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/wxy-jsonapi/wxy-jsonapi.html">
 <link rel="import" href="../../app/fc-navigation/fc-navigation.html">
-<link rel="import" href="../../app/fc-workout-list/fc-workout-list.html">
+<link rel="import" href="../../app/fc-workout-template-list/fc-workout-template-list.html">
 
 <dom-module id="planning-page">
   <template>
+    <wxy-jsonapi id="api"></wxy-jsonapi>
     <wxy-scaffold>
       <div class="tool fit">
         <!--TODO: Make logo into a .png-->
@@ -15,7 +17,7 @@
       </div>
       <fc-navigation class="navigation" selected="planning" router="[[router]]"></fc-navigation>
       <paper-toolbar class="nav-toolbar"></iron-icon>Workout Templates</paper-toolbar>
-      <fc-workout-list></fc-workout-list>
+      <fc-workout-template-list controller="[[controller]]"></fc-workout-template-list>
     </wxy-scaffold>
   </template>
 </dom-module>

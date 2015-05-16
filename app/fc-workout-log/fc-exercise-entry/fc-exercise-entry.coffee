@@ -27,6 +27,7 @@ Polymer
         totalReps += parseInt set.repetitions
     @numSets = @exercise.sets.length - 1
     @averageWeight = Math.round @totalWeight / totalReps or 0
+    return
 
   handleExerciseToggle:->
     @collapseClosed = !@collapseClosed

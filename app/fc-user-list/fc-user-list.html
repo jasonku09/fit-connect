@@ -38,6 +38,9 @@
              onfocus="this.placeholder = ''"
              onblur="this.placeholder = 'Search'">
     </div>
+    <div style="z-index:-1" hidden$="[[computeListEmpty(userList)]]" class="fit vertical layout center center-justified">
+      <div style="font-size: 18px;color: grey;">Client List Empty</div>
+    </div>
     <template is="x-repeat" items="[[userList]]">
       <paper-icon-item class="horizontal layout center" on-tap="handleItemTap" style$="[[parent.computeClientStyle(item.username, selectedUser)]]">
         <image class="profile-image" src="../../images/default_profile.png" item-icon>

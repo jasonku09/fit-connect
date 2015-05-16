@@ -23,6 +23,7 @@
     "iron-autogrow-textarea": "polymerelements/iron-autogrow-textarea#0.8",
     "iron-localstorage": "polymerelements/iron-localstorage#0.8",
     "iron-overlay-behavior": "polymerelements/iron-overlay-behavior#0.8",
-    "paper-fab": "polymerelements/paper-fab#0.8"
+    "paper-fab": "polymerelements/paper-fab#0.8",
+    "moment": "~2.10.3"
   }
 }

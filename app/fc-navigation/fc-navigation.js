@@ -18,6 +18,10 @@
           displayName: 'Clients',
           icon: 'social:people-outline'
         }, {
+          name: 'planning',
+          displayName: 'Planning',
+          icon: 'assignment'
+        }, {
           name: 'inbox',
           displayName: 'Inbox',
           icon: 'mail'
@@ -29,10 +33,6 @@
           name: 'calendar',
           displayName: 'Calendar',
           icon: 'schedule'
-        }, {
-          name: 'planning',
-          displayName: 'Planning',
-          icon: 'assignment'
         }
       ];
       _ref = this.tabs;

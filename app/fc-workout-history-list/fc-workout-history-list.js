@@ -5,92 +5,67 @@
       selectedWorkout: {
         type: Object,
         notify: true
+      },
+      workoutHistory: {
+        type: Array
       }
     },
-    attached: function() {
-      return this.workoutHistory = [
-        {
-          name: "Week 1 Cycle 1",
-          created: "5/1/2015"
-        }, {
-          name: "Week 1 Cycle 2",
-          created: "5/3/2015"
-        }, {
-          name: "Week 1 Cycle 3",
-          created: "5/3/2015"
-        }, {
-          name: "Week 2 Cycle 1",
-          created: "5/3/2015"
-        }, {
-          name: "Week 2 Cycle 2",
-          created: "5/3/2015"
-        }
-      ];
+    attached: function() {},
+    handleWorkoutHistoryTap: function(e) {
+      var selectedWorkout;
+      selectedWorkout = this.$.historyList.itemForElement(e.target);
+      this.selectedWorkout = this._parseHistory(selectedWorkout);
     },
-    handleWorkoutHistoryTap: function() {
-      this.exerciseTypes = this.$['fc-enums'].ExerciseType;
-      this.defaultExerciseType = this.exerciseTypes.Weights;
-      this.selectedWorkout = {
-        exercises: [
-          {
-            name: "Barbell Bench Press - Medium Grip",
-            type: this.exerciseTypes.Weights,
-            sets: [
-              {
-                index: 1,
-                repetitions: null,
-                weight: null
-              }
-            ],
-            comments: ""
-          }, {
-            name: "Incline Dumbbell Press",
-            type: this.exerciseTypes.Body,
-            sets: [
-              {
-                index: 1,
-                repetitions: null,
-                weight: null
-              }
-            ],
-            comments: ""
-          }, {
-            name: "Incline Dumbbell Flyes",
-            type: this.exerciseTypes.Cardio,
-            sets: [
-              {
-                index: 1,
-                repetitions: null,
-                weight: null
-              }
-            ],
-            comments: ""
-          }, {
-            name: "Machine Shoulder (Military) Press",
-            type: this.exerciseTypes.Cardio,
-            sets: [
-              {
-                index: 1,
-                repetitions: null,
-                weight: null
-              }
-            ],
-            comments: ""
-          }, {
-            name: "Arnold Dumbbell Press",
-            type: this.exerciseTypes.Cardio,
-            sets: [
-              {
-                index: 1,
-                repetitions: null,
-                weight: null
-              }
-            ],
-            comments: ""
-          }
-        ]
+    computeListEmpty: function(workoutHistory) {
+      return workoutHistory.length > 0;
+    },
+    _parseHistory: function(selectedWorkout) {
+      var exercise, exercisesHash, existingExercise, index, workout, _i, _len, _ref;
+      workout = {
+        exercises: [],
+        created: selectedWorkout.created || "Unknown",
+        comments: selectedWorkout.commnets || "",
+        name: selectedWorkout.name || "New Workout"
       };
-      this.selectedWorkout.comments = "hello";
+      exercisesHash = {};
+      _ref = selectedWorkout.exercises;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        exercise = _ref[_i];
+        if (!exercisesHash[exercise.name]) {
+          exercisesHash[exercise.name] = true;
+          workout.exercises.push({
+            name: exercise.name,
+            sets: [
+              {
+                index: 1,
+                repetitions: exercise.repetitions || null,
+                weight: exercise.weight || null,
+                comments: exercise.comments || ""
+              }
+            ]
+          });
+        } else {
+          index = this._findExerciseIndex(workout.exercises, exercise.name);
+          existingExercise = workout.exercises[index];
+          existingExercise.sets.push({
+            index: existingExercise.sets.length + 1,
+            repetitions: exercise.repetitions || null,
+            weight: exercise.weight || null,
+            comments: exercise.comments || ""
+          });
+        }
+      }
+      return workout;
+    },
+    _findExerciseIndex: function(array, exerciseName) {
+      var exercise, index, _i, _len;
+      for (index = _i = 0, _len = array.length; _i < _len; index = ++_i) {
+        exercise = array[index];
+        if (exercise.name === exerciseName) {
+          return index;
+        }
+      }
+      return -1;
     }
   });
 

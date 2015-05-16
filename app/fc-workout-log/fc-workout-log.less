@@ -1,18 +1,12 @@
 //out: fc-workout-log.css
 
-#date-container{
+#date-container, input{
   font-size: 14px;
   font-weight:500;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   color:black;
   background-color: white;
   border-bottom: 1px solid lightgrey;
-  iron-icon:first-child{
-    margin-right: 35px;
-  }
-  iron-icon:last-child{
-    margin-left: 35px;
-  }
 }
 
 #exercises-container{
@@ -22,4 +16,12 @@
   right: 0;
   bottom: 0;
   overflow: auto;
+}
+paper-toolbar{
+  paper-button{
+    background: rgb(70, 144, 208);
+    color: white;
+    height: 70%;
+    line-height: normal;
+    }
 }

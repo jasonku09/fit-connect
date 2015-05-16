@@ -15,7 +15,10 @@
   </style>
   <template>
     <fc-enums id="fc-enums"></fc-enums>
-    <template is="x-repeat" items="[[workoutHistory]]">
+    <div style="z-index:-1" hidden$="[[computeListEmpty(workoutHistory)]]" class="fit vertical layout center center-justified">
+      <div style="font-size: 18px;color: grey;">Workout List is Empty</div>
+    </div>
+    <template id="historyList" is="x-repeat" items="[[workoutHistory]]">
       <paper-icon-item on-tap="handleWorkoutHistoryTap">
         <iron-icon icon="bookmark-outline" item-icon></iron-icon>
         <paper-item-body two-line>
