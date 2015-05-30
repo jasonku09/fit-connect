@@ -1,63 +1,7 @@
-<link rel="import" href="../../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../../bower_components/iron-collapse/iron-collapse.html">
-<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../../../bower_components/paper-item/paper-item.html">
-<link rel="import" href="../../../bower_components/paper-item/paper-item-body.html">
-<link rel="import" href="../../../bower_components/paper-toolbar/paper-toolbar.html">
-
 <dom-module id="fc-exercise-entry">
-  <link rel="import" type="css" href="fc-exercise-entry.css">
   <template>
-    <paper-item on-click="handleExerciseToggle">
-      <div class="selected-box" hidden$="{{collapseClosed}}"></div>
-      <paper-item-body two-line class="vertical layout">
-        <input class="name-input" value="{{exercise.name::input}}" placeholder="Exercise Name">
-        <div secondary class="subtext">
-          Sets:
-          <span class="padding-right">[[numSets]]</span>
-          Average:
-          <span class="padding-right">[[averageWeight]]</span>
-          Total:
-          <span class="padding-right">[[totalWeight]]</span>
-        </div>
-      </paper-item-body>
-      <div class="flex"></div>
-      <iron-icon icon="expand-more" hidden$="{{!collapseClosed}}"></iron-icon>
-    </paper-item>
-    <iron-collapse id$="[[collapseID]]">
-      <div class="main vertical layout flex  center-justified">
-        <template is="x-repeat" items="{{exercise.sets}}">
-          <div class="flex horizontal layout" style="width: 100%">
-            <div class="padding-left">[[item.index]]</div>
-            <div class="flex"></div>
-            <input class="rep-input"
-                   value="{{item.repetitions::input}}"
-                   onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-                   on-click="onFocus">
-             <div class="padding-left subtext">Reps</div>
-             <div class="flex"></div>
-             <input style="margin-left: 25px" class="weight-input"
-                    value="{{item.weight::input}}"
-                    onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-                    on-tap="onFocus"
-                    onblur="parent._handleSetsChange">
-             <div class="padding-left subtext">lbs</div>
-             <iron-icon on-tap="onDeleteSetTap" icon="cancel" style="width: 15px; height: 15px; margin-left: 10px"></iron-icon>
-          </div>
-        </template>
-        <div class="comments-section vertical layout">
-          <span>Comments:</span>
-          <input class="comments-input" value="{{exercise.comments::input}}">
-        </div>
-      </div>
-      <paper-toolbar id="exercise-tool">
-        <iron-icon class="padding-right" icon="delete"></iron-icon>
-        <iron-icon class="padding-right padding-left" icon="shop-two"></iron-icon>
-        <iron-icon class="padding-right padding-left" icon="alarm"></iron-icon>
-        <div class="flex"></div>
-        <iron-icon icon="expand-less" on-click="handleExerciseToggle"></iron-icon>
-      </paper-toolbar>
-    </iron-collapse>
+
   </template>
 </dom-module>
+
 <script src="fc-exercise-entry.js"></script>

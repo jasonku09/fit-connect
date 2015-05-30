@@ -14,6 +14,10 @@ Polymer
       type: Number
       value: 0
 
+    rotate:
+      type: Boolean
+      value: false
+
     rotateCounter:
       type: Number
       value: 1.5
@@ -35,37 +39,18 @@ Polymer
       @containerWidth = @$.body.clientWidth
       @containerHeight = @$.body.clientHeight
 
-      @muscleNames = @_GetMuscleNames()
+      @muscleNames = @getMuscleNames()
 
-      @_CreateCamera()
-      @_CreateRenderer()
-      @_CreateScene()
+      @_createCamera()
+      @_createRenderer()
+      @_createScene()
 
       #if not @rotate
       @controls = new THREE.OrbitControls @camera, @$.body
 
       @$.body.appendChild @renderer.domElement
-      @_Render()
+      @_render()
       return
-    , 100
-    return
-
-  onTap: (event, detail, sender) ->
-    event.preventDefault()
-    @selectedObject?.material.opacity = 0.5
-
-    @selectedObject = @_GetIntersection event
-    return
-
-  # Not implemented
-  onResize: ->
-    @async ->
-      @containerWidth = @$.body.clientWidth
-      @containerHeight = @$.body.clientHeight
-
-      @camera.aspect = @containerWidth / @containerHeight
-      @camera.updateProjectionMatrix()
-      @renderer.setSize @containerWidth, @containerHeight
     , 100
     return
 
@@ -76,14 +61,36 @@ Polymer
       object.geometry.dispose()
     return
 
-  _Render: ->
-    @_Animate()
-    @rotateCounter += @spinSpeed
-    @renderer.render @scene, @camera
-    requestAnimationFrame @_Render.bind @
+  handleResize: ->
+    @async ->
+      @containerWidth = @$.body.clientWidth
+      @containerHeight = @$.body.clientHeight
+
+      @camera.aspect = @containerWidth / @containerHeight
+      @camera.updateProjectionMatrix()
+      @renderer.setSize @containerWidth, @containerHeight
+    , 100
     return
 
-  _GetIntersection: (event) ->
+  getMuscleNames: ->
+    muscles = 'Abdominals,Abductors,Adductors,Biceps,Calves,Chest,Forearms,Glutes,Hamstrings,Lats,Lower Back,Middle Back,Neck,Obliques,Quadriceps,Shoulders,Traps,Triceps'.split ','
+    ((muscle.charAt(0).toLowerCase() + muscle.slice(1)).replace(/\s/g, '') for muscle in muscles)
+
+  _handleTap: (event, detail, sender) ->
+    event.preventDefault()
+    @selectedObject?.material.opacity = 0.5
+
+    @selectedObject = @_getIntersection event
+    return
+
+  _render: ->
+    @_animate()
+    @rotateCounter += @spinSpeed
+    @renderer.render @scene, @camera
+    requestAnimationFrame @_render.bind @
+    return
+
+  _getMuscleNamesetIntersection: (event) ->
     x = (event.x - 20) / @containerWidth * 2 - 1
     y = - (event.y - 20) /  @containerHeight * 2 + 1
     vector = new THREE.Vector3 x, y, 1
@@ -92,7 +99,7 @@ Polymer
     intersects = raycaster.intersectObjects @objects
     if intersects.length > 0 then intersects[0].object else null
 
-  _CreateCamera: ->
+  _createCamera: ->
     viewAngle = 60
     aspectRatio = @containerWidth / @containerHeight
     near = 1
@@ -104,22 +111,22 @@ Polymer
     #@camera.lookAt cameraLookPoint
     return
 
-  _CreateScene: ->
+  _createScene: ->
     @scene = new THREE.Scene()
-    @_LoadModels()
+    @_loadModels()
     return
 
-  _CreateRenderer: ->
+  _createRenderer: ->
     @renderer = new THREE.WebGLRenderer alpha: true
     @renderer.setSize @containerWidth, @containerHeight
     return
 
-  _LoadModels: ->
+  _loadModels: ->
     @loader = new THREE.JSONLoader()
-    @_LoadModel muscle for muscle in @muscleNames
+    @_loadModel muscle for muscle in @muscleNames
     return
 
-  _LoadModel: (muscleName) ->
+  _loadModel: (muscleName) ->
     @loader.load "app/fc-body/objects/hifi/#{muscleName}.js", (geometry) =>
       meshMaterial = new THREE.MeshBasicMaterial
         color: @settings.color
@@ -135,7 +142,7 @@ Polymer
       return
     return
 
-  _Animate: ->
+  _animate: ->
     if @selectedObject and not @rotate
       @theta = 0.1
       @selectedObject.material.opacity = (Math.sin @theta) / 5 + 0.7
@@ -146,10 +153,10 @@ Polymer
       @camera.lookAt @scene.position
 
     if @objects.length is 18
-      @_UpdateMuscleColors()
+      @_updateMuscleColors()
     return
 
-  _UpdateMuscleColors: ->
+  _updateMuscleColors: ->
     for muscle, index in @muscleNames
       muscleLoad = @muscles[muscle] or 0
       for object in @objects
@@ -158,7 +165,3 @@ Polymer
           object.material.color.offsetHSL 0, 0, -(0.005 * muscleLoad)
 
     return
-
-  _GetMuscleNames: ->
-    muscles = 'Abdominals,Abductors,Adductors,Biceps,Calves,Chest,Forearms,Glutes,Hamstrings,Lats,Lower Back,Middle Back,Neck,Obliques,Quadriceps,Shoulders,Traps,Triceps'.split ','
-    ((muscle.charAt(0).toLowerCase() + muscle.slice(1)).replace(/\s/g, '') for muscle in muscles)

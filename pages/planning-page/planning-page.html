@@ -1,23 +1,24 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/wxy-jsonapi/wxy-jsonapi.html">
-<link rel="import" href="../../app/fc-navigation/fc-navigation.html">
-<link rel="import" href="../../app/fc-workout-template-list/fc-workout-template-list.html">
-
 <dom-module id="planning-page">
   <template>
-    <wxy-jsonapi id="api"></wxy-jsonapi>
     <wxy-scaffold>
-      <div class="tool fit">
-        <!--TODO: Make logo into a .png-->
-        <div class="horizontal layout center">
-          <div id="logo" class="horizontal layout center center-justified">
-            Fit<span id="large">C</span>onnect
-          </div>
+      <fc-navigation class="navigation" selected="clients" router="[[router]]" token="{{token}}"></fc-navigation>
+      <div class="tool fit horizontal layout center">
+        <fc-logo></fc-logo>
+        <div class="flex"></div>
+        <div>
+          <span>[[user.username]]</span>
+          <paper-icon-button icon="expand-more"></paper-icon-button>
         </div>
       </div>
-      <fc-navigation class="navigation" selected="planning" router="[[router]]"></fc-navigation>
-      <paper-toolbar class="nav-toolbar"></iron-icon>Workout Templates</paper-toolbar>
-      <fc-workout-template-list controller="[[controller]]"></fc-workout-template-list>
+      <div class="right-tool">
+        <div class="vertical layout">
+          <span class="title">[[selectedUser.username]]</span>
+        </div>
+      </div>
+      <paper-toolbar class="nav-toolbar">
+        Workout Templates
+      </paper-toolbar>
+      <fc-workout-template-list></fc-workout-template-list>
     </wxy-scaffold>
   </template>
 </dom-module>

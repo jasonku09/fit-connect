@@ -12,6 +12,10 @@
         type: Number,
         value: 0
       },
+      rotate: {
+        type: Boolean,
+        value: false
+      },
       rotateCounter: {
         type: Number,
         value: 1.5
@@ -34,30 +38,13 @@
       this.async(function() {
         this.containerWidth = this.$.body.clientWidth;
         this.containerHeight = this.$.body.clientHeight;
-        this.muscleNames = this._GetMuscleNames();
-        this._CreateCamera();
-        this._CreateRenderer();
-        this._CreateScene();
+        this.muscleNames = this.getMuscleNames();
+        this._createCamera();
+        this._createRenderer();
+        this._createScene();
         this.controls = new THREE.OrbitControls(this.camera, this.$.body);
         this.$.body.appendChild(this.renderer.domElement);
-        this._Render();
-      }, 100);
-    },
-    onTap: function(event, detail, sender) {
-      var _ref;
-      event.preventDefault();
-      if ((_ref = this.selectedObject) != null) {
-        _ref.material.opacity = 0.5;
-      }
-      this.selectedObject = this._GetIntersection(event);
-    },
-    onResize: function() {
-      this.async(function() {
-        this.containerWidth = this.$.body.clientWidth;
-        this.containerHeight = this.$.body.clientHeight;
-        this.camera.aspect = this.containerWidth / this.containerHeight;
-        this.camera.updateProjectionMatrix();
-        return this.renderer.setSize(this.containerWidth, this.containerHeight);
+        this._render();
       }, 100);
     },
     detached: function() {
@@ -70,13 +57,40 @@
         object.geometry.dispose();
       }
     },
-    _Render: function() {
-      this._Animate();
+    handleResize: function() {
+      this.async(function() {
+        this.containerWidth = this.$.body.clientWidth;
+        this.containerHeight = this.$.body.clientHeight;
+        this.camera.aspect = this.containerWidth / this.containerHeight;
+        this.camera.updateProjectionMatrix();
+        return this.renderer.setSize(this.containerWidth, this.containerHeight);
+      }, 100);
+    },
+    getMuscleNames: function() {
+      var muscle, muscles, _i, _len, _results;
+      muscles = 'Abdominals,Abductors,Adductors,Biceps,Calves,Chest,Forearms,Glutes,Hamstrings,Lats,Lower Back,Middle Back,Neck,Obliques,Quadriceps,Shoulders,Traps,Triceps'.split(',');
+      _results = [];
+      for (_i = 0, _len = muscles.length; _i < _len; _i++) {
+        muscle = muscles[_i];
+        _results.push((muscle.charAt(0).toLowerCase() + muscle.slice(1)).replace(/\s/g, ''));
+      }
+      return _results;
+    },
+    _handleTap: function(event, detail, sender) {
+      var _ref;
+      event.preventDefault();
+      if ((_ref = this.selectedObject) != null) {
+        _ref.material.opacity = 0.5;
+      }
+      this.selectedObject = this._getIntersection(event);
+    },
+    _render: function() {
+      this._animate();
       this.rotateCounter += this.spinSpeed;
       this.renderer.render(this.scene, this.camera);
-      requestAnimationFrame(this._Render.bind(this));
+      requestAnimationFrame(this._render.bind(this));
     },
-    _GetIntersection: function(event) {
+    _getMuscleNamesetIntersection: function(event) {
       var intersects, raycaster, vector, x, y;
       x = (event.x - 20) / this.containerWidth * 2 - 1;
       y = -(event.y - 20) / this.containerHeight * 2 + 1;
@@ -90,7 +104,7 @@
         return null;
       }
     },
-    _CreateCamera: function() {
+    _createCamera: function() {
       var aspectRatio, far, near, viewAngle;
       viewAngle = 60;
       aspectRatio = this.containerWidth / this.containerHeight;
@@ -99,26 +113,26 @@
       this.camera = new THREE.PerspectiveCamera(viewAngle, aspectRatio, near, far);
       this.camera.position.z = 60;
     },
-    _CreateScene: function() {
+    _createScene: function() {
       this.scene = new THREE.Scene();
-      this._LoadModels();
+      this._loadModels();
     },
-    _CreateRenderer: function() {
+    _createRenderer: function() {
       this.renderer = new THREE.WebGLRenderer({
         alpha: true
       });
       this.renderer.setSize(this.containerWidth, this.containerHeight);
     },
-    _LoadModels: function() {
+    _loadModels: function() {
       var muscle, _i, _len, _ref;
       this.loader = new THREE.JSONLoader();
       _ref = this.muscleNames;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         muscle = _ref[_i];
-        this._LoadModel(muscle);
+        this._loadModel(muscle);
       }
     },
-    _LoadModel: function(muscleName) {
+    _loadModel: function(muscleName) {
       this.loader.load("app/fc-body/objects/hifi/" + muscleName + ".js", (function(_this) {
         return function(geometry) {
           var mesh, meshMaterial;
@@ -137,7 +151,7 @@
         };
       })(this));
     },
-    _Animate: function() {
+    _animate: function() {
       if (this.selectedObject && !this.rotate) {
         this.theta = 0.1;
         this.selectedObject.material.opacity = (Math.sin(this.theta)) / 5 + 0.7;
@@ -148,10 +162,10 @@
         this.camera.lookAt(this.scene.position);
       }
       if (this.objects.length === 18) {
-        this._UpdateMuscleColors();
+        this._updateMuscleColors();
       }
     },
-    _UpdateMuscleColors: function() {
+    _updateMuscleColors: function() {
       var index, muscle, muscleLoad, object, _i, _j, _len, _len1, _ref, _ref1;
       _ref = this.muscleNames;
       for (index = _i = 0, _len = _ref.length; _i < _len; index = ++_i) {
@@ -166,16 +180,6 @@
           }
         }
       }
-    },
-    _GetMuscleNames: function() {
-      var muscle, muscles, _i, _len, _results;
-      muscles = 'Abdominals,Abductors,Adductors,Biceps,Calves,Chest,Forearms,Glutes,Hamstrings,Lats,Lower Back,Middle Back,Neck,Obliques,Quadriceps,Shoulders,Traps,Triceps'.split(',');
-      _results = [];
-      for (_i = 0, _len = muscles.length; _i < _len; _i++) {
-        muscle = muscles[_i];
-        _results.push((muscle.charAt(0).toLowerCase() + muscle.slice(1)).replace(/\s/g, ''));
-      }
-      return _results;
     }
   });
 

@@ -1,30 +1,24 @@
 (function() {
   Polymer({
-    is: 'fc-workout-history-list',
-    properties: {
-      selectedWorkout: {
-        type: Object,
-        notify: true
-      },
-      workoutHistory: {
-        type: Array
-      }
+    is: "fc-workout-history-list"
+  }, properties({
+    selected: {
+      type: Object,
+      notify: true
     },
-    attached: function() {},
-    handleWorkoutHistoryTap: function(e) {
+    history: Array
+  }), {
+    _handleHistoryTap: function(e) {
       var selectedWorkout;
-      selectedWorkout = this.$.historyList.itemForElement(e.target);
-      this.selectedWorkout = this._parseHistory(selectedWorkout);
-    },
-    computeListEmpty: function(workoutHistory) {
-      return workoutHistory.length > 0;
+      selectedWorkout = this.$.repeat.itemForElement(e.target);
+      this.selected = this._parseHistory(selectedWorkout);
     },
     _parseHistory: function(selectedWorkout) {
       var exercise, exercisesHash, existingExercise, index, workout, _i, _len, _ref;
       workout = {
         exercises: [],
         created: selectedWorkout.created || "Unknown",
-        comments: selectedWorkout.commnets || "",
+        comments: selectedWorkout.comments || "",
         name: selectedWorkout.name || "New Workout"
       };
       exercisesHash = {};

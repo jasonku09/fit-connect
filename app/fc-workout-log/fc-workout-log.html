@@ -1,51 +1,8 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
-<link rel="import" href="../../bower_components/paper-item/paper-item.html">
-<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
-<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
-<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icons.html">
-<link rel="import" href="../../bower_components/ui-full-dialog/ui-full-dialog.html">
-<link rel="import" href="fc-exercise-entry/fc-exercise-entry.html">
-
 <dom-module id="fc-workout-log">
-  <link rel="import" type="css" href="fc-workout-log.css">
   <template>
-    <ui-full-dialog id="selectTemplateDialog" with-backdrop="true">
-      <paper-toolbar class="dialog-toolbar" header>Select Template</paper-toolbar>
-      <paper-item>
-        <paper-item-body>
-          <div class="padding-bottom">Workout Templates</div>
-        </paper-item-body>
-      </paper-item>
-      <template id="templateList" is="x-repeat" items="{{workoutTemplates}}">
-        <paper-icon-item on-tap="handleTemplateTap">
-          <iron-icon item-icon icon="grade"></iron-icon>
-          <div>[[item.name]]</div>
-        </paper-icon-item>
-      </template>
-      <paper-button affirmative class="primary-button" on-tap="handleAddTemplate">Ok</paper-button>
-      <paper-button dismissive on-tap="handleCancelTap">Cancel</paper-button>
-    </ui-full-dialog>
-
-    <paper-toolbar id="date-container">
-      <paper-item>
-        <paper-item-body two-line>
-          <input value="{{workout.name::input}}">
-        </paper-item-body>
-      </paper-item>
-      <div class="flex"></div>
-      <paper-button on-tap="handleLoadTap">Load</paper-button>
-      <paper-button on-tap="handleSaveTap">Save</paper-button>
-    </paper-toolbar>
-
-    <div id="exercises-container">
-      <template is="x-repeat" items="{{workout.exercises}}">
-        <fc-exercise-entry exercise="{{item}}"></fc-exercise-entry>
-      </template>
-    </div>
-    <paper-fab class="temp-fab" icon="add" on-tap="handleFabTap"></paper-fab>
+    <template is="dom-repeat" items="[[workout.exercises]]">
+      <fc-exercise-entry exercise="[[item]]"></fc-exercise-entry>
+    </template>
   </template>
 </dom-module>
 

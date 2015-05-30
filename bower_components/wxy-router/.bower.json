@@ -18,11 +18,11 @@
     "route-recognizer": "~0.1.1",
     "polymer": "Polymer/polymer#^0.8.0"
   },
-  "_release": "d48e634f13",
+  "_release": "7b3d7b69b6",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "d48e634f13179dcfecc8ce9771d4eabc3283239d"
+    "commit": "7b3d7b69b633e420b916fa2df9bdf2676b5eafc7"
   },
   "_source": "git://github.com/wxy-elements/wxy-router.git",
   "_target": "*",

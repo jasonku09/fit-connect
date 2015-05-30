@@ -1,49 +1,29 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/social-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/communication-icons.html">
-<link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
 
 <dom-module id="fc-navigation">
   <style>
-    .drawer{
-      background-color: rgb(37, 44, 63);
-      color: rgb(125,125,125);
-      font-weight: 300;
+    :host {
+      @apply(--layout-fit);
+      @apply(--layout-vertical);
+      @apply(--layout-center);
     }
-    .nav-item{
-      height: 75px;
-      padding: 15px;
-    }
-    iron-icon{
-    color: rgb(125,125,125);
-      width: 30px;
-      height: 30px;
-      margin-bottom: 5px;
-    }
-    .selected{
-      color:white;
-    }
-    .selected-bar{
-      width: 5px;
-      height: 100%;
-      background-color:blue;
+
+    .nav-item {
+      padding: 20px 0;
     }
   </style>
   <template>
-    <iron-localstorage id="tokenStorage" name="token" value="{{token}}" ></iron-localstorage>
-    <div class="drawer vertical layout fit">
-      <template is="x-repeat" items="[[tabs]]">
-        <div class="nav-item vertical layout center center-justified" on-tap="onItemTap">
-          <iron-icon class$="[[item.class]]" icon="[[item.icon]]"></iron-icon>
-          <div class$="[[item.class]]">[[item.displayName]]</div>
-        </div>
-      </template>
-      <div class="flex"></div>
-      <paper-button on-tap="handleLogout">Log Out</paper-button>
-    </div>
+    <template id="repeat" is="dom-repeat" items="[[tabs]]">
+      <div class="nav-item vertical layout center">
+        <iron-icon icon="[[item.icon]]"></iron-icon>
+        <div>[[item.displayName]]</div>
+      </div>
+    </template>
   </template>
 </dom-module>
+
 <script src="fc-navigation.js"></script>

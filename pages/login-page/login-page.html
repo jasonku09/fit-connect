@@ -1,63 +1,26 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../../bower_components/wxy-jsonapi/wxy-jsonapi.html">
 <link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../../app/fc-logo/fc-logo.html">
+<link rel="import" href="../../app/fc-account-control/fc-account-control.html">
 
 <dom-module id="login-page">
   <style>
-    .main{
+    :host {
       background-color: rgb(70, 144, 208);
-      color: grey;
-      font-size: 14px;
+      @apply(--layout-fit);
+      @apply(--layout-vertical);
+      @apply(--layout-center);
     }
-    #login-dialog{
-      margin-top: 25px;
-      width: 350px;
-      height: 275px;
-      background-color: white;
-      font-weight: 900;
+
+    #logo {
+      margin: 50px 0;
     }
-    .tool {
-      background-color: rgb(70, 144, 208);
-    }
-    input{
-      background-color:rgb(215, 215, 215);
-      font-family: 'Roboto';
-      padding: 5px;
-      width: 250px;
-    }
-    #logo{
-      margin-top: 20px;
-      font-size: 20px;
-      letter-spacing: 3px;
-      width: 200px;
-    }
-    #large{
-      font-size: 28px !important;
-    }
+
   </style>
   <template>
-    <iron-localstorage name="token" value="{{token}}"></iron-localstorage>
-    <wxy-jsonapi id="api"></wxy-jsonapi>
-    <div class="main vertical layout fit center">
-      <div id="logo" class="horizontal layout center center-justified">
-        Fit<span id="large">C</span>onnect
-      </div>
-      <div id="login-dialog" class="vertical layout center center-justified" style$="{{computeDialogStyle(signup)}}">
-        <div hidden$="[[!signup]]" class="padding-top">Full Name </div>
-        <input spellcheck="false" hidden$="[[!signup]]" class="padding-bottom" value="{{nameInput::input}}">
-        <div class="padding-bottom padding-top"> Email Address </div>
-        <input spellcheck="false" class="padding-bottom" value="{{emailInput::input}}">
-        <div class="padding-bottom"> Password </div>
-        <input type="password" spellcheck="false" value="{{passwordInput::input}}">
-        <paper-button hidden$="[[signup]]" class="primary-button" on-tap="handleLoginTap">Login</paper-button>
-        <paper-button class="padding-top" on-tap="handleSignupTap" style$="{{computeSignupStyle(signup)}}">Sign Up</paper-button>
-        <paper-button hidden$="[[!signup]]" class="padding-top" on-tap="handleBackTap">Back</paper-button>
-      </div>
-    </div>
+    <fc-logo id="logo" class="size-large"></fc-logo>
+    <fc-account-control on-authenticated="_handleAuthenticated"></fc-account-control>
   </template>
 </dom-module>
 

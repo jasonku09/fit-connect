@@ -6,22 +6,22 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-<!--
-/**
- * @group Iron Elements
- *
- * iron-request can be used to perform XMLHttpRequests.
- *
- *     <iron-request id="xhr"></iron-request>
- *     ...
- *     this.$.xhr.send({url: url, params: params});
- *
- * @element iron-request
- */
--->
 
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../promise-polyfill/promise-polyfill-lite.html">
+
+<!--
+@group Iron Elements
+
+iron-request can be used to perform XMLHttpRequests.
+
+    <iron-request id="xhr"></iron-request>
+    ...
+    this.$.xhr.send({url: url, params: params});
+
+@element iron-request
+-->
+
 <script>
   Polymer({
     is: 'iron-request',
@@ -41,7 +41,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         notify: true,
         readOnly: true,
         value: function() {
-          this._setXhr(new XMLHttpRequest());
+          return new XMLHttpRequest();
         }
       },
 
@@ -50,7 +50,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * resolved.
        *
        * @attribute response
-       * @type *
+       * @type Object
        * @default null
        */
       response: {
@@ -58,7 +58,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         notify: true,
         readOnly: true,
         value: function() {
-          this._setResponse(null);
+         return null;
         }
       },
 
@@ -71,16 +71,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @default `new Promise`
        */
       completes: {
-        type: Promise,
+        type: Object,
         readOnly: true,
         notify: true,
         value: function() {
-          var completes = new Promise(function (resolve, reject) {
+          return new Promise(function (resolve, reject) {
             this.resolveCompletes = resolve;
             this.rejectCompletes = reject;
           }.bind(this));
-
-          this._setCompletes(completes);
         }
       },
 
@@ -97,7 +95,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         notify: true,
         readOnly: true,
         value: function() {
-          this._setProgress({});
+          return {};
         }
       },
 
@@ -112,24 +110,47 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         type: Boolean,
         notify: true,
         readOnly: true,
-        value: function() {
-          this._setAborted(false);
-        }
+        value: false,
       }
+    },
+
+    /**
+     * Succeeded is true if the request succeeded. The request succeeded if the
+     * status code is greater-than-or-equal-to 200, and less-than 300. Also,
+     * the status code 0 is accepted as a success even though the outcome may
+     * be ambiguous.
+     *
+     * @return boolean
+     */
+    get succeeded() {
+      var status = this.xhr.status || 0;
+
+      // Note: if we are using the file:// protocol, the status code will be 0
+      // for all outcomes (successful or otherwise).
+      return status === 0 ||
+        (status >= 200 && status < 300);
     },
 
     /**
      * Sends an HTTP request to the server and returns the XHR object.
      *
      * @method request
-     * @param {Object} options
-     *    @param {String} options.url The url to which the request is sent.
-     *    @param {String} options.method The HTTP method to use, default is GET.
-     *    @param {boolean} options.async By default, all requests are sent asynchronously. To send synchronous requests, set to true.
-     *    @param {Object} options.body The content for the request body for POST method.
-     *    @param {Object} options.headers HTTP request headers.
-     *    @param {String} options.handleAs The response type. Default is 'text'.
-     *    @param {boolean} options.withCredentials Whether or not to send credentials on the request. Default is false.
+     * @param {{
+     *   url: string,
+     *   method: (string|undefined),
+     *   async: (boolean|undefined),
+     *   body: (ArrayBuffer|ArrayBufferView|Blob|Document|FormData|null|string|undefined),
+     *   headers: (Object|undefined),
+     *   handleAs: (string|undefined),
+     *   withCredentials: (boolean|undefined)}} options -
+     *     url The url to which the request is sent.
+     *     method The HTTP method to use, default is GET.
+     *     async By default, all requests are sent asynchronously. To send synchronous requests,
+     *         set to true.
+     *     body The content for the request body for POST method.
+     *     headers HTTP request headers.
+     *     handleAs The response type. Default is 'text'.
+     *     withCredentials Whether or not to send credentials on the request. Default is false.
      * @return Promise
      */
     send: function (options) {
@@ -141,8 +162,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       xhr.addEventListener('readystatechange', function () {
         if (xhr.readyState === 4 && !this.aborted) {
+
+          if (!this.succeeded) {
+            this.rejectCompletes(new Error('The request failed with status code: ' + this.xhr.status));
+            return;
+          }
+
           this._setResponse(this.parseResponse());
-          this.resolveCompletes(this.response);
+          this.resolveCompletes(this);
         }
       }.bind(this));
 
@@ -155,7 +182,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }.bind(this))
 
       xhr.addEventListener('error', function (error) {
-        this.rejectCompletes(error)
+        this.rejectCompletes(error);
       }.bind(this));
 
       xhr.addEventListener('abort', function () {
@@ -179,8 +206,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       // In IE, `xhr.responseType` is an empty string when the response
       // returns. Hence, caching it as `xhr._responseType`.
-      xhr.responseType = xhr._responseType = options.handleAs;
-      xhr.withCredentials = options.withCredentials;
+      xhr.responseType = xhr._responseType = (options.handleAs || 'text');
+      xhr.withCredentials = !!options.withCredentials;
 
       xhr.send(options.body);
 

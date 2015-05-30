@@ -1,9 +1,6 @@
 (function() {
   Polymer({
-    is: "planning-page",
-    ready: function() {
-      this.controller = this.$.api;
-    }
+    is: "planning-page"
   });
 
 }).call(this);

@@ -1,55 +1,6 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../fc-body/fc-body.html">
-<link rel="import" href="../../services/fc-data/fc-data.html">
-<link rel="import" href="../../bower_components/paper-item/paper-item.html">
-<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
-<link rel="import" href="../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
-
 <dom-module id="fc-workout-detail">
-  <style>
-    paper-button{
-      height: 35px;
-      background-color: rgb(70, 144, 208);
-      color: white;
-      font-size: 12px;
-      font-weight: 100;
-      margin: 5px;
-      letter-spacing: 1px;
-    }
-    textarea{
-      width: 220px;
-      border:none;
-      font-size: 13px;
-      background-color: whitesmoke;
-    }
-    textarea:focus{
-      outline:none;
-    }
-  </style>
   <template>
-    <fc-data id="data"></fc-data>
-    <div class="vertical layout fit">
-      <paper-item>
-        <div>Workout Details</div>
-      </paper-item>
-      <fc-body id="body" class="vertical layout flex-2" muscles="[[muscles]]" rotate="true"></fc-body>
-      <paper-item class="padding-top">
-        <paper-item-body>
-          <div>Targetted Muscles:</div>
-          <div secondary>[[mainMuscles]]</div>
-        </paper-item-body>
-      </paper-item>
-      <paper-item>
-      </paper-item>
-      <paper-item>
-        <paper-item-body>
-          <div>Workout Notes</div>
-          <iron-autogrow-textarea bind-value="{{temp}}" id="a1">
-            <textarea id="t1" rows="10"></textarea>
-          </iron-autogrow-textarea>
-        </paper-item-body>
-      </paper-item>
-    </div>
+
   </template>
 </dom-module>
 

@@ -1,31 +1,41 @@
 {
   "name": "iron-selector",
-  "version": "0.8.3",
+  "version": "1.0.0",
+  "description": "Manages a set of elements that can be selected",
   "private": true,
+  "license": "http://polymer.github.io/LICENSE.txt",
   "main": [
     "iron-selector.html"
   ],
-  "authors": "The Polymer Authors",
+  "authors": [
+    "The Polymer Authors"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "iron"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/PolymerElements/iron-selector.git"
   },
   "dependencies": {
-    "polymer": "Polymer/polymer#v0.8.0-rc.7"
+    "polymer": "Polymer/polymer#^1.0.0"
   },
   "devDependencies": {
-    "test-fixture": "PolymerElements/test-fixture#^0.8.0",
-    "web-component-tester": "Polymer/web-component-tester#^2.2.3",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.6.0"
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+    "web-component-tester": "*",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/PolymerElements/iron-selector",
-  "_release": "0.8.3",
+  "_release": "1.0.0",
   "_resolution": {
     "type": "version",
-    "tag": "v0.8.3",
-    "commit": "58f87005d6eb717b05668b8a78a7c51c0893eee3"
+    "tag": "v1.0.0",
+    "commit": "80d136db1b37e89ae272d1e712f509748878807a"
   },
   "_source": "git://github.com/PolymerElements/iron-selector.git",
-  "_target": "^0.8.0",
+  "_target": "^1.0.0",
   "_originalSource": "PolymerElements/iron-selector"
 }

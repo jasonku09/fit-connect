@@ -1,46 +1,49 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/wxy-scaffold/wxy-scaffold.html">
-<link rel="import" href="../../bower_components/wxy-jsonapi/wxy-jsonapi.html">
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
-<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
-<link rel="import" href="../../app/fc-user-list/fc-user-list.html">
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../../bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../app/fc-client-list/fc-client-list.html">
+<link rel="import" href="../../app/fc-client-detail/fc-client-detail.html">
 <link rel="import" href="../../app/fc-navigation/fc-navigation.html">
-<link rel="import" href="../../app/fc-user-detail/fc-user-detail.html">
-
 
 <dom-module id="home-page">
-  <link rel="import" type="css" href="home-page.css">
+  <style>
+    .nav-toolbar {
+      background-color: #f0f0f0;
+      color: gray;
+      font-size: 14px;
+    }
+
+    paper-fab {
+      background-color: #388E3C;
+    }
+
+  </style>
   <template>
-    <wxy-jsonapi id="api"></wxy-jsonapi>
-    <wxy-scaffold id="host">
+    <wxy-scaffold>
       <fc-navigation class="navigation" selected="clients" router="[[router]]" token="{{token}}"></fc-navigation>
-      <div class="tool fit">
-        <!--TODO: Make logo into a .png-->
-        <div class="horizontal layout center">
-          <div id="logo" class="horizontal layout center center-justified" on-tap="handleTest">
-            Fit<span id="large">C</span>onnect
-          </div>
-          <div class="title padding-left"></div>
-          <div class="flex"></div>
-          <div style="font-size:16px; font-weight:200" class="padding-right">[[user.username]]<iron-icon class="padding-left" icon="expand-more"></iron-icon></div>
+      <div class="tool fit horizontal layout center">
+        <fc-logo></fc-logo>
+        <div class="flex"></div>
+        <div>
+          <span>[[user.username]]</span>
+          <paper-icon-button icon="expand-more"></paper-icon-button>
         </div>
       </div>
       <div class="right-tool">
         <div class="vertical layout">
-          <span class="title">[[selectedUser.username]]</span>
+          <span class="title">[[selectedClient.username]]</span>
         </div>
       </div>
-      <fc-user-detail class="right-drawer" hidden$="[[computeUserDetailHidden(selectedUser)]]" controller="[[controller]]" user-id="[[selectedUser._id]]" router="[[router]]"></fc-user-detail>
+      <fc-client-detail class="right-drawer"></fc-client-detail>
       <paper-toolbar class="nav-toolbar">
-        Clients
+        <span>Clients</span>
         <div class="flex"></div>
-        <iron-icon class="tool-icon" icon="today"></iron-icon>
-        <iron-icon class="tool-icon" icon="editor:format-list-bulleted"></iron-icon>
+        <paper-icon-button class="tool-icon" icon="today"></paper-icon-button>
+        <paper-icon-button class="tool-icon" icon="editor:format-list-bulleted"></paper-icon-button>
       </paper-toolbar>
-      <fc-user-list id="user-list" controller="[[controller]]" selected-user="{{selectedUser}}" user-list="[[userlist]]" token="[[token]]"></fc-user-list>
+      <fc-client-list selected-client="{{selectedClient}}"></fc-client-list>
       <fc-calendar controller="[[controller]]"></fc-calendar>
     </wxy-scaffold>
   </template>

@@ -2,22 +2,24 @@
 <link rel="import" href="bower_components/wxy-router/wxy-router.html">
 
 <link rel="import" href="pages/home-page/home-page.html">
-<link rel="import" href="pages/user-page/user-page.html">
+<link rel="import" href="pages/client-page/client-page.html">
 <link rel="import" href="pages/workout-page/workout-page.html">
 <link rel="import" href="pages/data-page/data-page.html">
 <link rel="import" href="pages/login-page/login-page.html">
 <link rel="import" href="pages/planning-page/planning-page.html">
 
 <link rel="import" href="bower_components/wxy-scaffold/wxy-scaffold.html">
+<link rel="import" href="bower_components/wxy-styles/wxy-styles.html">
+
 <link rel="stylesheet" type="css" href="app.css">
-<script src="bower_components/moment/moment.js"></script>
+
 <dom-module id="fit-connect-app">
   <style>
     :host {
       --scaffold-right-tool-color: rgb(50, 115, 169);
       --scaffold-tool-color: rgb(70, 144, 208);
     }
-    *{
+    * {
       font-family: 'Roboto';
       font-size: 14px;
     }
@@ -28,11 +30,11 @@
                  name="home-page"></wxy-route>
       <wxy-route path="/login"
                 name="login-page"></wxy-route>
-      <wxy-route path="/user/:userId"
-                 name="user-page"></wxy-route>
-      <wxy-route path="/user/:userId/workout"
+      <wxy-route path="/client/:clientId"
+                 name="client-page"></wxy-route>
+      <wxy-route path="/client/:clientId/workout"
                  name="workout-page"></wxy-route>
-      <wxy-route path="/user/:userId/data"
+      <wxy-route path="/client/:clientId/data"
                  name="data-page"></wxy-route>
       <wxy-route path="/planning"
                  name="planning-page"></wxy-route>

@@ -4,54 +4,37 @@ Polymer
   properties:
     selected: String
     router: Object
-    token:
-      type: String
-      notify: true
+    tabs:
+      type: Array
+      value: [
+        name: 'clients'
+        displayName: 'Clients'
+        icon: 'social:people-outline'
+        handler: =>
+          @router.go "/"
+          return
+      ,
+        name: 'planning'
+        displayName: 'Planning'
+        icon: 'assignment'
+        handler: =>
+          @router.go "/planning"
+          return
+      ,
+        name: 'inbox'
+        displayName: 'Inbox'
+        icon: 'mail'
+      ,
+        name: 'import'
+        displayName: 'Import'
+        icon: 'communication:import-export'
+      ,
+        name: 'calendar'
+        displayName: 'Calendar'
+        icon: 'schedule'
+      ]
 
-
-  attached: ->
-    document.querySelector(".navigation").addEventListener('iron-localstorage-load', @checkToken(@router))
-    @tabs = [
-      name: 'clients'
-      displayName: 'Clients'
-      icon: 'social:people-outline'
-    ,
-      name: 'planning'
-      displayName: 'Planning'
-      icon: 'assignment'
-    ,
-      name: 'inbox'
-      displayName: 'Inbox'
-      icon: 'mail'
-    ,
-      name: 'import'
-      displayName: 'Import'
-      icon: 'communication:import-export'
-    ,
-      name: 'calendar'
-      displayName: 'Calendar'
-      icon: 'schedule'
-    ]
-
-    for tab in @tabs
-      if tab.name.toLowerCase() == @selected.toLowerCase()
-        tab.class = 'selected'
-        tab.selected = true
+  _handleItemTap: (e) ->
+    @selected = @$.repeat.itemForElement e.target
+    @selected._handler()
     return
-
-  onItemTap: (e)->
-    @selected = e.currentTarget._templateInstance._data.item.name
-    switch @selected
-      when 'clients' then @router.go '/'
-      when 'planning' then @router.go '/planning'
-    return
-
-  handleLogout: ->
-    @token = null
-    @router.go '/login'
-    return
-
-  checkToken:(router) ->
-    if !@token
-      router.go '/login'
-      return

@@ -23,6 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <link rel="import" href="../../test-fixture/test-fixture.html">
   <link rel="import" href="../iron-input.html">
+  <link rel="import" href="letters-only.html">
 
 </head>
 <body>
@@ -45,6 +46,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </template>
   </test-fixture>
 
+  <test-fixture id="prevent-invalid-input">
+    <template>
+      <input is="iron-input" prevent-invalid-input pattern="[0-9]*">
+    </template>
+  </test-fixture>
+
+  <test-fixture id="prevent-invalid-input-has-value">
+    <template>
+      <input is="iron-input" prevent-invalid-input pattern="[0-9]*" value="foobar">
+    </template>
+  </test-fixture>
+
+  <test-fixture id="prevent-invalid-input-has-bind-value">
+    <template>
+      <input is="iron-input" prevent-invalid-input pattern="[0-9]*" bind-value="foobar">
+    </template>
+  </test-fixture>
+
+  <test-fixture id="has-validator">
+    <template>
+      <letters-only></letters-only>
+      <input is="iron-input" validator="letters-only" pattern="[0-9]*">
+    </template>
+  </test-fixture>
+
   <script>
 
     suite('basic', function() {
@@ -55,6 +81,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         assert.equal(input.value, input.bindValue, 'value equals to bindValue');
       });
 
+      test('changing the input triggers an event', function(done) {
+        var input = fixture('basic');
+
+        input.addEventListener('bind-value-changed', function(value) {
+          assert.equal(input.value, input.bindValue, 'value equals to bindValue');
+          done();
+        });
+
+        input.value = "foo";
+        input._onInput();
+      });
+
       test('default value sets bindValue', function() {
         var input = fixture('has-value');
         assert.equal(input.bindValue, input.value, 'bindValue equals value');
@@ -63,6 +101,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       test('default bindValue sets value', function() {
         var input = fixture('has-bind-value');
         assert.equal(input.value, input.bindValue, 'value equals to bindValue');
+      });
+
+      test('validator used instead of constraints api if provided', function() {
+        var input = fixture('has-validator')[1];
+        input.value = '123';
+        input.validate();
+        assert.isTrue(input.invalid, 'input is invalid');
       });
 
     });

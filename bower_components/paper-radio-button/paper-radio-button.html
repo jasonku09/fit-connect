@@ -7,6 +7,11 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
+<link rel="import" href="../paper-styles/default-theme.html">
+<link rel="import" href="../paper-behaviors/paper-radio-button-behavior.html">
+
 <!--
 `paper-radio-button` is a button that can be either checked or unchecked.
 User can tap the radio button to check it.  But it cannot be unchecked by
@@ -19,39 +24,37 @@ Example:
 
     <paper-radio-button></paper-radio-button>
 
-Styling a radio button:
+### Styling
 
-<style is="x-style">
-  * {
-    /* Unhecked state colors. */
-    --paper-radio-button-unchecked-color: #5a5a5a;
-    --paper-radio-button-unchecked-ink-color: #5a5a5a;
+The following custom properties and mixins are available for styling:
 
-    /* Checked state colors. */
-    --paper-radio-button-checked-color: #009688;
-    --paper-radio-button-checked-ink-color: #0f9d58;
-  }
-</style>
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-radio-button-unchecked-color` | Radio button color when the input is not checked | `--primary-text-color`
+`--paper-radio-button-unchecked-ink-color` | Selected/focus ripple color when the input is not checked | `--primary-text-color`
+`--paper-radio-button-checked-color` | Radio button color when the input is checked | `--default-primary-color`
+`--paper-radio-button-checked-ink-color` | Selected/focus ripple color when the input is checked | `--default-primary-color`
+`--paper-radio-button-label-color` | Label color | `--primary-text-color`
 
 @group Paper Elements
 @element paper-radio-button
+@hero hero.svg
+@demo demo/index.html
 -->
 
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-ripple/paper-ripple.html">
-<link rel="import" href="../paper-styles/default-theme.html">
+<style is="custom-style">
+  :root {
+    --paper-radio-button-unchecked-color: var(--primary-text-color);
+    --paper-radio-button-unchecked-ink-color: var(--primary-text-color);
 
-/* TODO: This needs to use core-focusable when it's ready. */
+    --paper-radio-button-checked-color: var(--default-primary-color);
+    --paper-radio-button-checked-ink-color: var(--default-primary-color);
+
+    --paper-radio-button-label-color: var(--primary-text-color);
+  }
+</style>
+
 <dom-module id="paper-radio-button">
-  <style is="x-style">
-    * {
-      --paper-radio-button-unchecked-color: var(--primary-text-color);
-      --paper-radio-button-unchecked-ink-color: var(--primary-text-color);
-
-      --paper-radio-button-checked-color: var(--default-primary-color);
-      --paper-radio-button-checked-ink-color: var(--default-primary-color);
-    }
-  </style>
 
   <link rel="import" type="css" href="paper-radio-button.css">
 
@@ -60,117 +63,86 @@ Styling a radio button:
     <div id="radioContainer">
       <div id="offRadio"></div>
       <div id="onRadio"></div>
-      <paper-ripple id="ink" class="circle" recenters checked$="[[checked]]"></paper-ripple>
+      <paper-ripple id="ink" class="circle" center checked$="[[checked]]"></paper-ripple>
     </div>
 
     <div id="radioLabel" aria-hidden="true"><content></content></div>
 
   </template>
+
+  <script>
+    Polymer({
+      is: 'paper-radio-button',
+
+      behaviors: [
+        Polymer.PaperRadioButtonBehavior
+      ],
+
+      hostAttributes: {
+        role: 'radio',
+        'aria-checked': false,
+        tabindex: 0
+      },
+
+      properties: {
+        /**
+         * Fired when the checked state changes due to user interaction.
+         *
+         * @event change
+         */
+
+        /**
+         * Fired when the checked state changes.
+         *
+         * @event iron-change
+         */
+
+        /**
+         * Gets or sets the state, `true` is checked and `false` is unchecked.
+         */
+        checked: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true,
+          notify: true,
+          observer: '_checkedChanged'
+        },
+
+        /**
+         * If true, the button toggles the active state with each tap or press
+         * of the spacebar.
+         */
+        toggles: {
+          type: Boolean,
+          value: true,
+          reflectToAttribute: true
+        }
+      },
+
+      ready: function() {
+        if (Polymer.dom(this).textContent == '') {
+          this.$.radioLabel.hidden = true;
+        } else {
+          this.setAttribute('aria-label', Polymer.dom(this).textContent);
+        }
+        this._isReady = true;
+      },
+
+      _buttonStateChanged: function() {
+        if (this.disabled) {
+          return;
+        }
+        if (this._isReady) {
+          this.checked = this.active;
+        }
+      },
+
+      _checkedChanged: function() {
+        this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+        this.active = this.checked;
+        this.fire('iron-change');
+      }
+    })
+  </script>
+
 </dom-module>
-
-<script>
-  Polymer({
-    is: 'paper-radio-button',
-
-    // The custom properties shim is currently an opt-in feature.
-    enableCustomStyleProperties: true,
-
-    hostAttributes: {
-      role: 'radio',
-      'aria-checked': false,
-      tabindex: 0
-    },
-
-    properties: {
-      /**
-       * Fired when the checked state changes due to user interaction.
-       *
-       * @event change
-       */
-
-      /**
-       * Fired when the checked state changes.
-       *
-       * @event iron-change
-       */
-
-      /**
-       * Gets or sets the state, `true` is checked and `false` is unchecked.
-       *
-       * @attribute checked
-       * @type boolean
-       * @default false
-       */
-      checked: {
-        type: Boolean,
-        value: false,
-        reflectToAttribute: true,
-        observer: 'checkedChanged'
-      },
-
-      /**
-       * If true, the user cannot interact with this element.
-       *
-       * @attribute disabled
-       * @type boolean
-       * @default false
-       */
-      disabled: {
-        type: Boolean
-      },
-
-      /**
-       * Normally the user cannot uncheck the radio button by tapping once
-       * checked.  Setting this property to `true` makes the radio button
-       * toggleable from checked to unchecked.
-       *
-       * @attribute isToggle
-       * @type boolean
-       * @default false
-       */
-      isToggle: {
-        type: Boolean,
-        value: false
-      }
-    },
-
-    listeners: {
-      keydown: 'onKeyDown',
-      mousedown: 'onMouseDown'
-    },
-
-    ready: function() {
-      if (this.$.radioLabel.innerText == '') {
-        this.$.radioLabel.hidden = true;
-      } else {
-        this.setAttribute('aria-label', this.$.radioLabel.textContent);
-      }
-    },
-
-    onKeyDown: function(event) {
-      // Enter key.
-      if (event.keyCode === 13) {
-        this.onMouseDown();
-        event.preventDefault();
-      }
-    },
-
-    onMouseDown: function() {
-      if (this.disabled) {
-        return;
-      }
-
-      var old = this.checked;
-      this.checked = !this.isToggle || !this.checked;
-
-      if (this.checked !== old) {
-        this.fire('change');
-      }
-    },
-
-    checkedChanged: function() {
-      this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
-      this.fire('iron-change');
-    }
-  })
-</script>

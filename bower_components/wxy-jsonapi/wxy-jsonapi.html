@@ -1,13 +1,11 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/wxy-ajax/wxy-ajax.html">
-<link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/wxy-ajax/wxy-ajax.html">
 
 <dom-module id="wxy-jsonapi">
   <template>
-    <iron-localstorage id="tokenStorage" name="token" value="{{token}}" ></iron-localstorage>
-    <iron-localstorage id="templateStorage" name="templates" value="{{workoutTemplates}}" ></iron-localstorage>
     <wxy-ajax id="ajax"></wxy-ajax>
   </template>
 </dom-module>
 
 <script src="wxy-jsonapi.js"></script>
+<script src="wxy-jsonapi-form-behavior.js"></script>
