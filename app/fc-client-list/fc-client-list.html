@@ -1,0 +1,45 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/wxy-jsonapi/wxy-jsonapi.html">
+<link rel="import" href="../../app/fc-account/fc-account.html">
+<link rel="import" href="../../app/fc-client-form/fc-client-form.html">
+
+<dom-module id="fc-client-list">
+  <style>
+    .profile-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: lightgray;
+      margin: 10px 0;
+    }
+  </style>
+  <template>
+    <fc-account token="{{token}}"></fc-account>
+    <wxy-jsonapi id="api" uri="https://fitconnectapp.appspot.com/api/account/clients" token="[[token]]"></wxy-jsonapi>
+
+    <paper-dialog id="dialog"
+      with-backdrop-x always-on-top>
+      <h2>Add Client</h2>
+      <fc-client-form id="form" controller="[[controller]]"></fc-client-form>
+      <div class="buttons">
+        <paper-button on-tap="_handleAddTap" class="primary">Add</paper-button>
+        <paper-button dialog-dismiss class="default">Cancel</paper-button>
+      </div>
+    </paper-dialog>
+
+    <wxy-search-input value="{{search}}"></wxy-search-input>
+    <div id="list-container">
+      <template id="repeat" is="dom-repeat" items="[[list]]">
+        <paper-icon-item on-tap="_handleTap">
+          <iron-image class="profile-image" item-icon></iron-image>
+          <paper-item-body class="flex">[[item.username]]</paper-item-body>
+          <iron-icon icon="chevron-right"></iron-icon>
+        </paper-icon-item>
+      </template>
+    </div>
+    <paper-fab icon="add" on-tap="_handleFabTap" class="bottom-right"></paper-fab>
+  </template>
+</dom-module>
+
+<script src="fc-client-list.js"></script>

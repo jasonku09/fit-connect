@@ -1,0 +1,14 @@
+{
+  "name": "wxy-ajax",
+  "homepage": "https://github.com/wxy-elements/wxy-ajax",
+  "_release": "8d8bfa3fdb",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "8d8bfa3fdb455d962b3085bd83308e341969320e"
+  },
+  "_source": "git://github.com/wxy-elements/wxy-ajax.git",
+  "_target": "*",
+  "_originalSource": "wxy-elements/wxy-ajax",
+  "_direct": true
+}

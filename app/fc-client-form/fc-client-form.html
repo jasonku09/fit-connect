@@ -1,0 +1,27 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="../../bower_components/wxy-jsonapi/wxy-jsonapi.html">
+
+<dom-module id="fc-client-form">
+  <style>
+    :host {
+      display: block;
+      min-width: 300px;
+    }
+  </style>
+  <template>
+    <form>
+      <paper-input
+        label="Name"
+        value="{{form.username}}">
+      </paper-input>
+      <gold-email-input
+        label="Email (Optional)"
+        value="{{form.email}}">
+      </gold-email-input>
+    </form>
+  </template>
+</dom-module>
+
+<script src="fc-client-form.js"></script>

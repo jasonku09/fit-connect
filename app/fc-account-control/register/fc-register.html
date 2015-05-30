@@ -1,0 +1,27 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../app/fc-account/fc-account.html">
+
+<dom-module id="fc-register">
+  <style>
+    .buttons {
+      margin: 20px 0 10px;
+    }
+  </style>
+  <template>
+    <fc-account id="account"></fc-account>
+    <form>
+      <paper-input label="Full Name" value="{{form.username}}"></paper-input>
+      <gold-email-input label="Email Address" value="{{form.email}}"></gold-email-input>
+      <paper-input type="password" label="Password" value="{{form.phrase}}"></paper-input>
+      <div class="buttons">
+        <paper-button class="primary" on-click="_handleRegisterTap">Sign up</paper-button>
+        <content></content>
+      </div>
+    </form>
+  </template>
+</dom-module>
+
+<script src="fc-register.js"></script>

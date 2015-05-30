@@ -1,0 +1,31 @@
+<dom-module id="fc-logo">
+  <style>
+    :host {
+      font-size: 14px;
+      color: rgb(240, 240, 240);
+      margin: 0 10px;
+      letter-spacing: 2px;
+      font-weight: 100;
+      display: inline-block;
+      @apply(--layout-center);
+      @apply(--layout-center-justified);
+      @apply(--layout-horizontal);
+    }
+
+    :host(.size-large) {
+      font-size: 20px;
+      letter-spacing: 3px;
+    }
+
+    .large {
+      font-size: 1.5em;
+      font-weight: 400;
+    }
+
+  </style>
+  <template>
+    Fit<span class="large">C</span>onnect
+  </template>
+</dom-module>
+
+<script src="fc-logo.js"></script>

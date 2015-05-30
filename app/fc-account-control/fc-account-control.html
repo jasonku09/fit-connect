@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="login/fc-login.html">
+<link rel="import" href="register/fc-register.html">
+
+<dom-module id="fc-account-control">
+  <style>
+    :host {
+      display: inline-block;
+      width: 350px;
+      background-color: white;
+      padding: 30px;
+    }
+  </style>
+  <template>
+    <div hidden$="[[isRegistering]]">
+      <fc-login>
+        <paper-button on-tap="_handleRegisterTap">Sign up</paper-button>
+      </fc-login>
+    </div>
+    <div hidden$="[[!isRegistering]]">
+      <fc-register>
+        <paper-button on-tap="_handleBackTap">Back</paper-button>
+      </fc-register>
+    </div>
+  </template>
+</dom-module>
+
+<script src="fc-account-control.js"></script>

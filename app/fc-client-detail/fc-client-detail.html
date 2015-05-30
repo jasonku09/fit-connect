@@ -1,0 +1,35 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/communication-icons.html">
+<link rel="import" href="../../app/fc-body/fc-body.html">
+
+<dom module id="fc-client-detail">
+  <template>
+    <fc-body id="body" muscles="[[muscles]]" rotate></fc-body>
+    <paper-icon-item>
+      <iron-icon item-icon icon="communication:phone"></iron-icon>
+      <paper-item-body>
+      </paper-item-body>
+    </paper-icon-item>
+    <paper-icon-item>
+      <iron-icon item-icon icon="communication:email"></iron-icon>
+      <paper-item-body>
+      </paper-item-body>
+    </paper-icon-item>
+    <paper-icon-item>
+      <iron-icon item-icon icon="communication:message"></iron-icon>
+      <paper-item-body>
+      </paper-item-body>
+    </paper-icon-item>
+    <div>
+      <paper-button on-tap="_handleProfileTap">Profile</paper-button>
+      <paper-button on-tap="_handleWorkoutTap">Workout Log</paper-button>
+    </div>
+  </template>
+</dom-module>
+
+<script src="fc-client-detail.js"></script>

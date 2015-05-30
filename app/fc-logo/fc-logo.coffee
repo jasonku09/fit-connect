@@ -1,0 +1,2 @@
+Polymer
+  is: "fc-logo"
